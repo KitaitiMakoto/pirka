@@ -31,6 +31,8 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler', '~> 1.10'
   gem.add_development_dependency 'rake', '~> 10.0'
+  gem.add_development_dependency 'test-unit'
+  gem.add_development_dependency 'test-unit-notify'
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
   gem.add_development_dependency 'yard', '~> 0.8'
 end
