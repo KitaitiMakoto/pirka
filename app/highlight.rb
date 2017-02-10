@@ -91,7 +91,8 @@ module Pirka
 
         library["codelist"].each_pair do |cfi_string, lang|
           cfi = EPUB::Parser::CFI.parse(cfi_string)
-          item, elem = find_item_and_element_from_epub_by_cfi(epub, cfi)
+          itemref, elem = EPUB::Searcher.search_by_cfi(epub, cfi)
+          item = itemref.item
           doc = elem.document
           lexer = Rouge::Lexers.const_defined?(lang) ?
                     Rouge::Lexers.const_get(lang) :
@@ -151,34 +152,6 @@ module Pirka
           end
         }
         parser.order! argv
-      end
-
-      # @todo Move to EPUB Parser
-      def find_item_and_element_from_epub_by_cfi(epub, cfi)
-        path_in_package = cfi.paths.first
-        step_to_itemref = path_in_package.steps[1]
-        itemref = epub.spine.itemrefs[step_to_itemref.step / 2 - 1]
-
-        doc = itemref.item.content_document.nokogiri
-        path_in_doc = cfi.paths[1]
-        current_node = doc.root
-        path_in_doc.steps.each do |step|
-          if step.element?
-            current_node = current_node.element_children[step.value / 2 - 1]
-          else
-            element_index = (step.value - 1) / 2 - 1
-            if element_index == -1
-              current_node = current_node.children.first
-            else
-              prev = current_node.element_children[element_index]
-              break unless prev
-              current_node = prev.next_sibling
-              break unless current_node
-            end
-          end
-        end
-
-        return itemref.item, current_node
       end
     end
 
