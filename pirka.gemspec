@@ -32,6 +32,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'epub-maker'
   gem.add_runtime_dependency 'rouge'
   gem.add_runtime_dependency 'rouge-lexers-fluentd'
+  gem.add_runtime_dependency 'optparse-pathname'
 
   gem.add_development_dependency 'bundler', '~> 1.10'
   gem.add_development_dependency 'rake', '~> 10.0'
