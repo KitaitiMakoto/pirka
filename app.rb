@@ -14,7 +14,10 @@ module Pirka
     private
 
     def parse_options!(argv)
-      OptionParser.new.order!
+      parser = OptionParser.new {|opt|
+        opt.version = Pirka::VERSION
+      }
+      parser.order! argv
     end
   end
 end
