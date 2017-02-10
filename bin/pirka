@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require_relative "../app"
 
 root = File.expand_path(File.join(File.dirname(__FILE__),'..'))
 if File.directory?(File.join(root,'.git'))
@@ -12,3 +13,5 @@ if File.directory?(File.join(root,'.git'))
     end
   end
 end
+
+Pirka::App.new.run(ARGV)
