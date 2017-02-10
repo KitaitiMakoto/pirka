@@ -29,6 +29,12 @@ module Pirka
         epub_path = argv.shift
         raise ArgumentError, 'Specify EPUB file' unless epub_path
 
+        begin
+          # @todo Make this optional
+          require 'epub/maker/ocf/physical_container/zipruby'
+          EPUB::OCF::PhysicalContainer.adapter = :Zipruby
+        rescue LoadError
+        end
         epub = EPUB::Parser.parse(epub_path)
         $stderr.puts "Start detecting code from \"#{epub.title}\""
 
