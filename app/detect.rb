@@ -95,18 +95,6 @@ module Pirka
         print output.to_yaml
       end
 
-      # @todo Move to EPUB::Parser library
-      def find_path(elem)
-        steps = []
-        until elem.parent.document?
-          index = elem.parent.element_children.index(elem)
-          assertion = elem["id"] ? EPUB::CFI::IDAssertion.new(elem["id"]) : nil
-          steps.unshift EPUB::CFI::Step.new((index + 1) * 2, assertion)
-          elem = elem.parent
-        end
-        EPUB::CFI::Path.new(steps)
-      end
-
       # @todo Extract to library
       def determine_identifier(epub)
         Base64.urlsafe_encode64(epub.release_identifier)
