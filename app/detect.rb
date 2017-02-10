@@ -10,7 +10,11 @@ module Pirka
     class Detect
       def initialize
         # @todo Define and use class for code list
-        @codelist_dirs = [Pathname(Dir.home)/".config"/"pirka"/"codelist"]
+        @library_dirs = [
+          Pathname(Dir.home)/".config/pirka/codelist",
+          Pathname(__dir__)/"../data"
+        ]
+        @library_path = nil
         @interactive = false
 
         class_prefix = "Rouge::Lexers::"
