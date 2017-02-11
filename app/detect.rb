@@ -17,14 +17,15 @@ module Pirka
         @lbirary_dir = nil
         @interactive = false
 
-        class_prefix = "Rouge::Lexers::"
-        @available_lexers = Rouge::Lexer.all.each_with_object({}).with_index {|(lexer, lexers), index|
-          lexers[(index + 1).to_s] = lexer.to_s.sub(class_prefix, "")
+        @available_lexers = Rouge::Lexer.all.sort_by(&:tag).each_with_object({}).with_index {|(lexer, lexers), index|
+          lexers[(index + 1).to_s] = lexer
         }
         @lexers_display = @available_lexers.collect {|(index, lexer)|
-          "#{index}) #{lexer}"
-        }.join(" ")
-        @commands = "s) skip q) quit c) show code again o) show options again"
+          option = "#{index}) #{lexer.title}"
+          option << "(#{lexer.aliases.join(', ')})" unless lexer.aliases.empty?
+          option
+        }.join("  ")
+        @commands = ["s) skip", "q) quit", "c) show code", "o) show options"].join("  ")
       end
 
       def run(argv)
@@ -79,7 +80,7 @@ module Pirka
                       i = ask
                       next
                     end
-                    library.codelist[result[:location]] = {"language" => lexer}
+                    library.codelist[result[:location]] = {"language" => lexer.tag}
                     break
                   end
                 end
