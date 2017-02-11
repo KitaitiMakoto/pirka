@@ -24,18 +24,18 @@ module Pirka
 
       # @return [Array<Pathname>]
       def directories(user = nil)
-        dirs = ENV["XDG_DATA_DIRS"] ?
-                 ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)} :
-                 XDG_DATA_DIRS
-        dirs.unshift data_directory(user)
-        @additional_directories + dirs
+        data_dirs = ENV["XDG_DATA_DIRS"] ?
+                 ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)/"pirka"} :
+                 DATA_DIRS
+        data_home = ENV["XDG_DATA_HOME"] ?
+                      Pathname.new(ENV["XDG_DATA_HOME"])/"pirka" :
+                      Pathname.new(Dir.home(user))/DATA_HOME
+        @additional_directories + [data_home] + data_dirs
       end
 
       # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
       def data_directory(user = nil)
-        data_home = ENV["XDG_DATA_HOME"] ? Pathname.new(ENV["XDG_DATA_HOME"]) :
-                      Pathname.new(Dir.home)/XDG_DATA_HOME
-        data_home/"pirka"
+        directories.first
       end
 
       # @param [String] release_identifier
@@ -91,14 +91,12 @@ module Pirka
     attr_reader :metadata, :codelist
 
     # @param [Pathname, String, nil] directory for library files. When `nil` passed, default directories are used
-    def initialize(directory: nil)
-      @directory = directory && Pathname(directory)
+    def initialize
       @metadata = {}
       @codelist = {}
     end
 
     def data_directory(user = nil)
-      return @directory if @directory
       self.class.data_directory(user)
     end
 

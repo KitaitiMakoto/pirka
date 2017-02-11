@@ -6,6 +6,7 @@ require "epub/parser/cfi"
 
 class TestLibrary < Test::Unit::TestCase
   def setup
+    Pirka::Library.additional_directories.clear
     @library = Pirka::Library.new
     @library.metadata["Release Identifier"] = "abc"
     @library.metadata["title"] = "abc"
@@ -101,9 +102,10 @@ EOY
     end
   end
 
-  def test_save_to_specified_directory_when_initialized_with_directory
+  def test_save_to_specified_directory_when_additional_directory_is_prepended
     Dir.mktmpdir "pirka" do |dir|
-      library = Pirka::Library.new(directory: dir)
+      Pirka::Library.additional_directories << Pathname.new(dir)
+      library = Pirka::Library.new
       library.metadata["Release Identifier"] = "abc"
       library.metadata["title"] = "abc"
       library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "nginx"}
@@ -111,6 +113,7 @@ EOY
       library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "nginx"}
 
       library.save
+
       path = Pathname.new("#{dir}/YWJj.yaml")
       assert_path_exist path.to_path
       assert_equal @yaml, path.read
@@ -119,7 +122,8 @@ EOY
 
   def test_save_makes_subdirectory_when_basename_is_longer_than_4_characters
     Dir.mktmpdir "pirka" do |dir|
-      library = Pirka::Library.new(directory: dir)
+      Pirka::Library.additional_directories << Pathname.new(dir)
+      library = Pirka::Library.new
       library.metadata["Release Identifier"] = "abcd"
 
       library.save

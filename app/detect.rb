@@ -14,7 +14,6 @@ module Pirka
 
       def initialize
         @library_path = nil
-        @lbirary_dir = nil
         @interactive = false
 
         @available_lexers = Rouge::Lexer.all.sort_by(&:tag).each_with_object({}).with_index {|(lexer, lexers), index|
@@ -44,7 +43,7 @@ module Pirka
         $stderr.puts "Detecting code from \"#{epub.title}\""
 
         codelist = {}
-        library = Library.new(directory: @library_dir)
+        library = Library.new
         library.metadata["Release Identifier"] = epub.release_identifier
         library.metadata["title"] = epub.title
         catch do |quit|
@@ -109,9 +108,6 @@ module Pirka
           end
           opt.on "-l", "--library=FILE", "File to save library data", Pathname do |path|
             @library_path = path
-          end
-          opt.on "-d", "--directory=DIRECTORY", "Directory to save library data", Pathname do |path|
-            @library_dir = dir
           end
         }
         parser.order! argv
