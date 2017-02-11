@@ -84,20 +84,20 @@ EOY
       begin
         ENV["XDG_DATA_HOME"] = dir
         @library.save
-        path = Pathname.new(dir)/"pirka/YWJj.yaml"
-        assert_path_exist path
-
-        data = YAML.load_file(path)
-        codelist = data.delete("codelist")
-        assert_equal @library.metadata, data
-
-        expected_codelist = @library.each.with_object({}) {|(cfi, value), list|
-          list[cfi.to_fragment] = value
-        }
-        assert_equal expected_codelist, codelist
       ensure
         ENV["XDG_DATA_HOME"] = xdh
       end
+      path = Pathname.new(dir)/"pirka/YWJj.yaml"
+      assert_path_exist path
+
+      data = YAML.load_file(path)
+      codelist = data.delete("codelist")
+      assert_equal @library.metadata, data
+
+      expected_codelist = @library.each.with_object({}) {|(cfi, value), list|
+        list[cfi.to_fragment] = value
+      }
+      assert_equal expected_codelist, codelist
     end
   end
 end
