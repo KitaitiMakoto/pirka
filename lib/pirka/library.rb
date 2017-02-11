@@ -12,21 +12,24 @@ module Pirka
   class Library
     EXT = ".yaml"
     DIR_LENGTH = 4
-    XDG_DATA_HOME = ".local/share"
-    XDG_DATA_DIRS = "/usr/local/share:/usr/share"
+    XDG_DATA_HOME = Pathname.new(".local/share")
+    XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
 
     class << self
       attr_accessor :directory
 
       # @return [Array<Pathname>]
       def directories(user = nil)
-        [home(user)] +
-          (ENV["XDG_DATA_DIRS"] || XDG_DATA_DIRS).split(":").collect {|dir| Pathname.new(dir)}
+        dirs = ENV["XDG_DATA_DIRS"] ?
+                 ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)} :
+                 XDG_DATA_DIRS
+        dirs.unshift data_directory(user)
       end
 
       # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
-      def home(user = nil)
-        Pathname.new(ENV["XDG_DATA_HOME"] || File.join(Dir.home(user), XDG_DATA_HOME)) + "pirka"
+      def data_directory(user = nil)
+        data_home = ENV["XDG_DATA_HOME"] ? Pathname.new(ENV["XDG_DATA_HOME"]) : XDG_DATA_HOME
+        data_home/"pirka"
       end
 
       # @param [String] release_identifier
@@ -88,9 +91,9 @@ module Pirka
       @codelist = {}
     end
 
-    def directories(user = nil)
-      return [@directory] if @directory
-      self.class.directories(user)
+    def data_directory(user = nil)
+      return @directory if @directory
+      self.class.data_directory(user)
     end
 
     def filepath
@@ -102,7 +105,7 @@ module Pirka
     #   When `nil` is passwd, default directory + filepath determined by Release Identifier is used
     # @return [Pathname] File path that library data was saved
     def save(path = nil)
-      path = directories.first/filepath unless path
+      path = data_directory/filepath unless path
       path = Pathname(path) unless path.respond_to? :write
       path.dirname.mkpath unless path.dirname.directory?
       path.write(to_yaml)
