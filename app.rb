@@ -4,10 +4,6 @@ module Pirka
   class App
     APPS = {}
 
-    def initialize
-      @additional_library_dirs = []
-    end
-
     def run(argv)
       parse_options! argv
       app_name = argv.shift
