@@ -1,20 +1,20 @@
 require "optparse"
+require "optparse/pathname"
 require "epub/parser"
 require "epub/cfi"
 require "epub/searcher"
 require "rouge"
 require "rouge/lexers/fluentd"
+require "pirka/library"
 
 module Pirka
   class App
     class Detect
+      PROGRAM_NAME = "detect"
+
       def initialize
-        # @todo Define and use class for code list
-        @library_dirs = [
-          Pathname(Dir.home)/".config/pirka/codelist",
-          Pathname(__dir__)/"../data"
-        ]
         @library_path = nil
+        @lbirary_dir = nil
         @interactive = false
 
         class_prefix = "Rouge::Lexers::"
@@ -40,13 +40,18 @@ module Pirka
         rescue LoadError
         end
         epub = EPUB::Parser.parse(epub_path)
-        $stderr.puts "Start detecting code from \"#{epub.title}\""
+        $stderr.puts "Detecting code from \"#{epub.title}\""
 
         codelist = {}
+        library = Library.new(directory: @library_dir)
+        library.metadata["Release Identifier"] = epub.release_identifier
+        library.metadata["title"] = epub.title
         catch do |quit|
           EPUB::Searcher.search_element(epub, css: 'code').each do |result|
+            item = result[:itemref].item
             if @interactive
               catch do |skip|
+                show_item item
                 show_code result[:element]
                 show_options
                 show_commands
@@ -59,6 +64,7 @@ module Pirka
                   when "q"
                     throw quit
                   when "c"
+                    show_item item
                     show_code(result[:element])
                     show_options
                     show_commands
@@ -73,30 +79,22 @@ module Pirka
                       i = ask
                       next
                     end
-                    codelist[result[:location].to_fragment] = lexer
+                    library.codelist[result[:location]] = {"language" => lexer}
                     break
                   end
                 end
               end
             else
-              codelist[result[:location].to_fragment] = "Show below and choose language from #{@available_lexers.values.join(", ")}\n#{result[:element].content}"
+              library.codelist[result[:location]] = ({
+                "language" => nil,
+                "item" => result[:itemref].item.entry_name,
+                "code" => result[:element].content
+              })
             end
           end
-        end
 
-        puts determine_identifier(epub)
-        output = {
-          "Release Identifier" => epub.release_identifier,
-          "title" => epub.title,
-          "creators" => epub.metadata.creators.join(", "),
-          "identifiers" => epub.metadata.identifiers.collect {|identifier|
-            obj = {"content" => identifier.content}
-            obj["scheme"] = identifier.schem if identifier.scheme
-            obj
-          },
-          "codelist" => codelist
-        }
-        print output.to_yaml
+          library.save(@library_path)
+        end
       end
 
       # @todo Extract to library
@@ -111,8 +109,19 @@ module Pirka
           opt.on "-i", "--interactive" do
             @interactive = true
           end
+          opt.on "-l", "--library=FILE", "File to save library data", Pathname do |path|
+            @library_path = path
+          end
+          opt.on "-d", "--directory=DIRECTORY", "Directory to save library data", Pathname do |path|
+            @library_dir = dir
+          end
         }
         parser.order! argv
+      end
+
+      def show_item(item)
+        $stderr.puts
+        $stderr.puts item.entry_name
       end
 
       def show_code(code)
@@ -135,6 +144,6 @@ module Pirka
       end
     end
 
-    APPS["detect"] = Detect
+    APPS[Detect::PROGRAM_NAME] = Detect
   end
 end
