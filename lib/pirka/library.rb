@@ -13,7 +13,9 @@ module Pirka
     EXT = ".yaml"
     SUBDIR_LENGTH = 4
     XDG_DATA_HOME = Pathname.new(".local/share")
+    DATA_HOME = XDG_DATA_HOME/"pirka"
     XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
+    DATA_DIRS = XDG_DATA_DIRS.collect {|dir| dir/"pirka"}
 
     @additional_directories = []
 
