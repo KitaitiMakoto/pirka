@@ -1,5 +1,6 @@
 require "helper"
 require "yaml"
+require "tmpdir"
 require "pirka/library"
 require "epub/parser/cfi"
 
@@ -60,5 +61,20 @@ EOY
     expected = YAML.load(@yaml)
     actual = YAML.load(@library.to_yaml)
     assert_equal expected, actual
+  end
+
+  def test_save_to_path_when_path_specified
+    Dir.mktmpdir "pirka" do |dir|
+      path = Pathname.new(dir)/"arbitral-filename.yaml"
+      @library.save(path)
+      data = YAML.load_file(path.to_path)
+      codelist = data.delete("codelist")
+      assert_equal @library.metadata, data
+
+      expected_codelist = @library.each.with_object({}) {|(cfi, value), list|
+        list[cfi.to_fragment] = value
+      }
+      assert_equal expected_codelist, codelist
+    end
   end
 end
