@@ -68,10 +68,8 @@ module Pirka
 
     attr_reader :metadata, :codelist
 
-    # @param [Pathname, nil] directory for library files
-    def initialize(directory: nil, path: nil)
-      @directory = directory
-      @path = path
+    # @param [Pathname, String, nil] directory for library files. When `nil` passed, default directories are used
+    def initialize(directory: nil)
       @metadata = {}
       @codelist = {}
     end
