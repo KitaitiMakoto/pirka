@@ -70,6 +70,7 @@ module Pirka
 
     # @param [Pathname, String, nil] directory for library files. When `nil` passed, default directories are used
     def initialize(directory: nil)
+      @directory = Pathname(directory)
       @metadata = {}
       @codelist = {}
     end
