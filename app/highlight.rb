@@ -18,7 +18,7 @@ module Pirka
 
       # @todo Handle multiple renditions
       def run(argv)
-        parse_optoins! argv
+        parse_options! argv
 
         epub_path = argv.shift
         raise ArgumentError, 'Specify EPUB file' unless epub_path
@@ -138,7 +138,7 @@ module Pirka
       # @todo theme
       # @todo CSS file path
       # @todo scope
-      def parse_optoins!(argv)
+      def parse_options!(argv)
         parser = OptionParser.new {|opt|
           opt.on "-l", "--library=FILE", "library file", Pathname do |path|
             @library_path = path
