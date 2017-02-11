@@ -75,7 +75,12 @@ module Pirka
         dummy_origin = Addressable::URI.parse('file:///')
         css_path = "pirka/style.css" # @todo Avoid overwriting existing file other than Pirka's
 
-        library.codelist.each.reverse_each do |(cfi, lang)|
+        library.codelist.each.reverse_each do |(cfi, data)|
+          lang = data["language"]
+          unless lang
+            $stderr.puts "Language for #{cfi} is not detected"
+            next
+          end
           itemref, elem = EPUB::Searcher.search_by_cfi(epub, cfi)
           item = itemref.item
           doc = elem.document
