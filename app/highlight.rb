@@ -10,7 +10,7 @@ require "pirka/library"
 module Pirka
   class App
     class Highlight
-      PROGRAM_NAME = "highlihght"
+      PROGRAM_NAME = "highlight"
 
       def initialize
         @library_path = nil
