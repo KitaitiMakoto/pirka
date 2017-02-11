@@ -8,3 +8,7 @@ gemspec
 group :development do
   gem 'kramdown'
 end
+
+if RUBY_PLATFORM.match /darwin/
+  gem 'terminal-notifier'
+end
