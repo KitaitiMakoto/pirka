@@ -15,13 +15,18 @@ module Pirka
     XDG_DATA_HOME = Pathname.new(".local/share")
     XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
 
+    @additional_directories = []
+
     class << self
+      attr_accessor :additional_directories
+
       # @return [Array<Pathname>]
       def directories(user = nil)
         dirs = ENV["XDG_DATA_DIRS"] ?
                  ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)} :
                  XDG_DATA_DIRS
         dirs.unshift data_directory(user)
+        @additional_directories + dirs
       end
 
       # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html

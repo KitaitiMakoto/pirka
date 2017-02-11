@@ -4,6 +4,10 @@ module Pirka
   class App
     APPS = {}
 
+    def initialize
+      @additional_library_dirs = []
+    end
+
     def run(argv)
       parse_options! argv
       app_name = argv.shift
@@ -16,6 +20,9 @@ module Pirka
     def parse_options!(argv)
       parser = OptionParser.new {|opt|
         opt.version = Pirka::VERSION
+        opt.on "-d", "--directory=DIRECTORY", "Directory to save and read library data. Prepended to default directories. Specify multiple times to prepend multiple directories.", Pathname do |path|
+          Library.additional_directories << path
+        end
       }
       parser.order! argv
     end
