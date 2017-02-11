@@ -25,7 +25,7 @@ module Pirka
 
       # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
       def home(user = nil)
-        Pathname.new(ENV["XDG_DATA_HOME"] || Dir.home(user) + XDG_DATA_HOME) + "pirka"
+        Pathname.new(ENV["XDG_DATA_HOME"] || File.join(Dir.home(user), XDG_DATA_HOME)) + "pirka"
       end
 
       # @param [String] release_identifier
