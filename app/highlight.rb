@@ -87,7 +87,10 @@ module Pirka
           item = itemref.item
           doc = elem.document
           lexer = Rouge::Lexer.find(lang) || Rouge::Lexer.guess(source: elem.content)
-          next unless lexer # @todo warn
+          unless lexer
+            warn "Cannot find lexer for #{lang}"
+            next
+          end
           elem.inner_html = formatter.format(lexer.lex(elem.content)) # @todo Consider the case `elem` has descendants
 
           link = doc.css('#pirka').first # @todo Avoid conflict with existing link
