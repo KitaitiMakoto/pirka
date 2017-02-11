@@ -11,6 +11,7 @@ class TestLibrary < Test::Unit::TestCase
     @library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "Nginx"}
     @library.codelist[EPUB::CFI("/6/31!/4/2/56/2")] = {"language" => "Nginx"}
     @library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "Nginx"}
+    @fixure_path = "test/fixtures/YWJj.yaml"
     @yaml = <<EOY
 ---
 Release Identifier: abc
@@ -27,6 +28,12 @@ EOY
 
   def test_from_hash
     actual = Pirka::Library.from_hash(YAML.load(@yaml))
+    assert_equal @library.metadata, actual.metadata
+    assert_equal @library.each.to_a, actual.each.to_a
+  end
+
+  def test_from_file
+    actual = Pirka::Library.from_file(@fixure_path)
     assert_equal @library.metadata, actual.metadata
     assert_equal @library.each.to_a, actual.each.to_a
   end
