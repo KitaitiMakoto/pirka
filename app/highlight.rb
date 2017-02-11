@@ -80,7 +80,7 @@ module Pirka
         library.codelist.each.reverse_each do |(cfi, data)|
           lang = data["language"]
           unless lang
-            $stderr.puts "Language for #{cfi} is not detected"
+            warn "Language for #{cfi} is not detected"
             next
           end
           itemref, elem = EPUB::Searcher.search_by_cfi(epub, cfi)
