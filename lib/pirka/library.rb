@@ -11,7 +11,7 @@ module Pirka
   # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   class Library
     EXT = ".yaml"
-    DIR_LENGTH = 4
+    SUBDIR_LENGTH = 4
     XDG_DATA_HOME = Pathname.new(".local/share")
     XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
 
@@ -57,7 +57,7 @@ module Pirka
 
       def filepath(release_identifier)
         name = basename_without_ext(release_identifier)
-        name.insert(DIR_LENGTH, "/") if name.length > DIR_LENGTH
+        name.insert(SUBDIR_LENGTH, "/") if name.length > SUBDIR_LENGTH
         name + EXT
       end
 
