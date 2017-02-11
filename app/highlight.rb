@@ -7,15 +7,12 @@ require "epub/parser"
 require "epub/maker"
 require "rouge"
 require "rouge/lexers/fluentd"
+require "pirka/library"
 
 module Pirka
   class App
     class Highlight
       def initialize
-        @library_dirs = [
-          Pathname(Dir.home)/".config/pirka/codelist",
-          Pathname(__dir__)/"../data"
-        ]
         @library_path = nil
       end
 
@@ -64,19 +61,10 @@ module Pirka
         need_save
       end
 
-      # @todo Extract codelist as a library class
+      # @todo Do the best when file for release identifier is not find but for unique identifier found
       def find_library(unique_identifier, modified)
-        return YAML.load_file(@library_path.to_path) if @library_path
-
-        ext = ".yaml" # @todo Extract and use constant or configuration
-        @library_dirs.each {|dir|
-          # @todo Extract method to calcurate file name
-          candidate = (dir/Base64.urlsafe_encode64("#{unique_identifier}@#{modified}")).sub_ext(ext)
-          if candidate.file?
-            return YAML.load_file(candidate.to_path)
-          end
-          # @todo Consider the case only the unique identifier is the same
-        }
+        @library_path ? Library.from_file(@library_path) :
+          Library.find_by_release_identifier("#{unique_identifier}@#{modified}")
       end
 
       # @todo Consider descendant elements of code
@@ -89,8 +77,7 @@ module Pirka
         dummy_origin = Addressable::URI.parse('file:///')
         css_path = "pirka/style.css" # @todo Avoid overwriting existing file other than Pirka's
 
-        library["codelist"].each_pair do |cfi_string, lang|
-          cfi = EPUB::Parser::CFI.parse(cfi_string)
+        library.codelist.each.reverse_each do |(cfi, lang)|
           itemref, elem = EPUB::Searcher.search_by_cfi(epub, cfi)
           item = itemref.item
           doc = elem.document
