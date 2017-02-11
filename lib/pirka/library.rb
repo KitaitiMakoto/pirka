@@ -10,12 +10,13 @@ module Pirka
   # 
   # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   class Library
+    DIR_NAME = "pirka"
     EXT = ".yaml"
     SUBDIR_LENGTH = 4
     XDG_DATA_HOME = Pathname.new(".local/share")
-    DATA_HOME = XDG_DATA_HOME/"pirka"
+    DATA_HOME = XDG_DATA_HOME/DIR_NAME
     XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
-    DATA_DIRS = XDG_DATA_DIRS.collect {|dir| dir/"pirka"}
+    DATA_DIRS = XDG_DATA_DIRS.collect {|dir| dir/DIR_NAME}
 
     @additional_directories = []
 
@@ -25,10 +26,10 @@ module Pirka
       # @return [Array<Pathname>]
       def directories(user = nil)
         data_dirs = ENV["XDG_DATA_DIRS"] ?
-                 ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)/"pirka"} :
+                 ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)/DIR_NAME} :
                  DATA_DIRS
         data_home = ENV["XDG_DATA_HOME"] ?
-                      Pathname.new(ENV["XDG_DATA_HOME"])/"pirka" :
+                      Pathname.new(ENV["XDG_DATA_HOME"])/DIR_NAME :
                       Pathname.new(Dir.home(user))/DATA_HOME
         @additional_directories + [data_home] + data_dirs
       end
