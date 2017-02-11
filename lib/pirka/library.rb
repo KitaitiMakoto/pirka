@@ -75,6 +75,8 @@ module Pirka
       @codelist = {}
     end
 
+    # @return [String] String that `Release Identifier` property in metadata is encoded based on RFC 4648 "Base 64 Encoding with URL and Filename Safe Alphabet"
+    # @see https://tools.ietf.org/html/rfc4648#page-7
     # @todo Better name
     def basename_without_ext
       raise "Release Identifier is not set" unless @metadata["Release Identifier"]
