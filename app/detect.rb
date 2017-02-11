@@ -100,11 +100,6 @@ module Pirka
         end
       end
 
-      # @todo Extract to library
-      def determine_identifier(epub)
-        Base64.urlsafe_encode64(epub.release_identifier)
-      end
-
       private
 
       def parse_options!(argv)
