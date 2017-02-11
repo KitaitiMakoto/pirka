@@ -26,7 +26,8 @@ module Pirka
 
       # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
       def data_directory(user = nil)
-        data_home = ENV["XDG_DATA_HOME"] ? Pathname.new(ENV["XDG_DATA_HOME"]) : XDG_DATA_HOME
+        data_home = ENV["XDG_DATA_HOME"] ? Pathname.new(ENV["XDG_DATA_HOME"]) :
+                      Pathname.new(Dir.home)/XDG_DATA_HOME
         data_home/"pirka"
       end
 
