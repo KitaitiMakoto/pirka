@@ -100,4 +100,21 @@ EOY
       assert_equal expected_codelist, codelist
     end
   end
+
+  def test_find_by_release_identifier
+    Dir.mktmpdir "pirka" do |dir|
+      path = Pathname.new(dir)/"pirka/YWJj.yaml"
+      path.dirname.mkpath
+      path.write(@yaml)
+      xdh = ENV["XDG_DATA_HOME"]
+      begin
+        ENV["XDG_DATA_HOME"] = dir
+        library = Pirka::Library.find_by_release_identifier("abc")
+      ensure
+        ENV["XDG_DATA_HOME"] = xdh
+      end
+      assert_equal @library.metadata, library.metadata
+      assert_equal @library.each.to_a, library.each.to_a
+    end
+  end
 end
