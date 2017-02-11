@@ -18,10 +18,8 @@ module Pirka
       attr_accessor :directory
 
       # @return [Array<Pathname>]
-      def directories
-        return [@directory] if @directory
-
-        [home] +
+      def directories(user = nil)
+        [home(user)] +
           (ENV["XDG_DATA_DIRS"] || XDG_DATA_DIRS).split(":").collect {|dir| Pathname.new(dir)}
       end
 
@@ -70,9 +68,14 @@ module Pirka
 
     # @param [Pathname, String, nil] directory for library files. When `nil` passed, default directories are used
     def initialize(directory: nil)
-      @directory = Pathname(directory)
+      @directory = directory && Pathname(directory)
       @metadata = {}
       @codelist = {}
+    end
+
+    def directories(user = nil)
+      return [@directory] if @directory
+      self.class.directories(user)
     end
 
     # @return [String] String that `Release Identifier` property in metadata is encoded based on RFC 4648 "Base 64 Encoding with URL and Filename Safe Alphabet"
@@ -88,8 +91,9 @@ module Pirka
     end
 
     def save(path = nil)
-      path = @directory/basename unless path
+      path = directories.first/basename unless path
       path = Pathname(path) unless path.respond_to? :write
+      path.dirname.mkpath unless path.dirname.directory?
       path.write(to_yaml)
     end
 
