@@ -7,7 +7,9 @@ rescue LoadError => error
 end
 
 require "simplecov"
-SimpleCov.start
+SimpleCov.start do
+  add_filter "/test"
+end
 
 require 'test/unit'
 require "test/unit/notify"
