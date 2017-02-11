@@ -95,11 +95,15 @@ module Pirka
       self.class.basename(@metadata["Release Identifier"])
     end
 
+    # @param [Pathname, String, nil] path File path to save library data.
+    #   When `nil` is passwd, default directory + basename determined by Release Identifier is used
+    # @return [Pathname] File path that library data was saved
     def save(path = nil)
       path = directories.first/basename unless path
       path = Pathname(path) unless path.respond_to? :write
       path.dirname.mkpath unless path.dirname.directory?
       path.write(to_yaml)
+      path
     end
 
     # Iterate over codelist in order of EPUB CFI
