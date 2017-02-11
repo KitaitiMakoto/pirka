@@ -89,6 +89,7 @@ module Pirka
 
     def save(path = nil)
       path = @directory/basename unless path
+      path = Pathname(path) unless path.respond_to? :write
       path.write(to_yaml)
     end
 
