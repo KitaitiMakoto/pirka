@@ -31,12 +31,24 @@ module Pirka
       # @param [String] release_identifier
       # @return [Library, nil]
       def find_by_release_identifier(release_identifier)
-        lib_path = basename
+        lib_path = basename(release_identifier)
         directories.each do |dir|
           path = dir/lib_path
           return from_file(path) if path.file?
         end
         nil
+      end
+
+      # @param [String] release_identifier Release Identifier
+      # @return [String] String that `Release Identifier` property in metadata is encoded based on RFC 4648 "Base 64 Encoding with URL and Filename Safe Alphabet"
+      # @see https://tools.ietf.org/html/rfc4648#page-7
+      # @todo Better name
+      def basename_without_ext(release_identifier)
+        Base64.urlsafe_encode64(release_identifier)
+      end
+
+      def basename(release_identifier)
+        basename_without_ext(release_identifier) + EXT
       end
 
       # @param [Pathname, String] path
@@ -83,11 +95,12 @@ module Pirka
     # @todo Better name
     def basename_without_ext
       raise "Release Identifier is not set" unless @metadata["Release Identifier"]
-      Base64.urlsafe_encode64(@metadata["Release Identifier"])
+      self.class.basename_without_ext(@metadata["Release Identifier"])
     end
 
     def basename
-      basename_without_ext + EXT
+      raise "Release Identifier is not set" unless @metadata["Release Identifier"]
+      self.class.basename(@metadata["Release Identifier"])
     end
 
     def save(path = nil)
