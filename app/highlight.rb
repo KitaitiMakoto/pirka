@@ -86,9 +86,7 @@ module Pirka
           itemref, elem = EPUB::Searcher.search_by_cfi(epub, cfi)
           item = itemref.item
           doc = elem.document
-          lexer = Rouge::Lexers.const_defined?(lang) ?
-                    Rouge::Lexers.const_get(lang) :
-                    Rouge::Lexer.guess(source: elem.content)
+          lexer = Rouge::Lexer.find(lang) || Rouge::Lexer.guess(source: elem.content)
           next unless lexer # @todo warn
           elem.inner_html = formatter.format(lexer.lex(elem.content)) # @todo Consider the case `elem` has descendants
 

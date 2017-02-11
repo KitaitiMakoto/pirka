@@ -9,9 +9,9 @@ class TestLibrary < Test::Unit::TestCase
     @library = Pirka::Library.new
     @library.metadata["Release Identifier"] = "abc"
     @library.metadata["title"] = "abc"
-    @library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "Nginx"}
-    @library.codelist[EPUB::CFI("/6/31!/4/2/56/2")] = {"language" => "Nginx"}
-    @library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "Nginx"}
+    @library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "nginx"}
+    @library.codelist[EPUB::CFI("/6/31!/4/2/56/2")] = {"language" => "nginx"}
+    @library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "nginx"}
     @fixure_path = "test/fixtures/YWJj.yaml"
     @yaml = <<EOY
 ---
@@ -19,11 +19,11 @@ Release Identifier: abc
 title: abc
 codelist:
   epubcfi(/6/30!/4/2/56/2):
-    language: Nginx
+    language: nginx
   epubcfi(/6/30!/4/2/58/2):
-    language: Nginx
+    language: nginx
   epubcfi(/6/31!/4/2/56/2):
-    language: Nginx
+    language: nginx
 EOY
   end
 
@@ -106,9 +106,9 @@ EOY
       library = Pirka::Library.new(directory: dir)
       library.metadata["Release Identifier"] = "abc"
       library.metadata["title"] = "abc"
-      library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "Nginx"}
-      library.codelist[EPUB::CFI("/6/31!/4/2/56/2")] = {"language" => "Nginx"}
-      library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "Nginx"}
+      library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "nginx"}
+      library.codelist[EPUB::CFI("/6/31!/4/2/56/2")] = {"language" => "nginx"}
+      library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "nginx"}
 
       library.save
       path = Pathname.new("#{dir}/YWJj.yaml")

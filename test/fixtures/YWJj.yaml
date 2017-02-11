@@ -3,8 +3,8 @@ Release Identifier: abc
 title: abc
 codelist:
   epubcfi(/6/30!/4/2/56/2):
-    language: Nginx
+    language: nginx
   epubcfi(/6/30!/4/2/58/2):
-    language: Nginx
+    language: nginx
   epubcfi(/6/31!/4/2/56/2):
-    language: Nginx
+    language: nginx
