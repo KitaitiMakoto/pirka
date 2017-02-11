@@ -25,6 +25,12 @@ codelist:
 EOY
   end
 
+  def test_from_hash
+    actual = Pirka::Library.from_hash(YAML.load(@yaml))
+    assert_equal @library.metadata, actual.metadata
+    assert_equal @library.each.to_a, actual.each.to_a
+  end
+
   def test_each_iterates_over_list_in_order_of_cfi
     cfis = %w[/6/30!/4/2/56/2
               /6/30!/4/2/58/2
