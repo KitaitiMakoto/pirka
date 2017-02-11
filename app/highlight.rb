@@ -1,6 +1,4 @@
 require "pathname"
-require "base64"
-require "yaml"
 require "optparse"
 require "optparse/pathname"
 require "epub/parser"
