@@ -94,7 +94,9 @@ module Pirka
             end
           end
 
-          library.save(@library_path)
+          path = library.save(@library_path)
+          $stderr.puts "Library file was saved to:"
+          $stdout.puts path
         end
       end
 
