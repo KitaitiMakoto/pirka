@@ -16,8 +16,6 @@ module Pirka
     XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
 
     class << self
-      attr_accessor :directory
-
       # @return [Array<Pathname>]
       def directories(user = nil)
         dirs = ENV["XDG_DATA_DIRS"] ?
