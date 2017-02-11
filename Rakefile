@@ -10,6 +10,7 @@ end
 
 require 'rake'
 
+task :default => :test
 
 require 'rubygems/tasks'
 Gem::Tasks.new
