@@ -117,6 +117,17 @@ EOY
     end
   end
 
+  def test_save_makes_subdirectory_when_basename_is_longer_than_4_characters
+    Dir.mktmpdir "pirka" do |dir|
+      library = Pirka::Library.new(directory: dir)
+      library.metadata["Release Identifier"] = "abcd"
+
+      library.save
+      path = Pathname.new(dir)/"YWJj/ZA==.yaml"
+      assert_path_exist path
+    end
+  end
+
   def test_find_by_release_identifier
     Dir.mktmpdir "pirka" do |dir|
       path = Pathname.new(dir)/"pirka/YWJj.yaml"

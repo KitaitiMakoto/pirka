@@ -11,6 +11,7 @@ module Pirka
   # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   class Library
     EXT = ".yaml"
+    DIR_LENGTH = 4
     XDG_DATA_HOME = ".local/share"
     XDG_DATA_DIRS = "/usr/local/share:/usr/share"
 
@@ -31,7 +32,7 @@ module Pirka
       # @param [String] release_identifier
       # @return [Library, nil]
       def find_by_release_identifier(release_identifier)
-        lib_path = basename(release_identifier)
+        lib_path = filepath(release_identifier)
         directories.each do |dir|
           path = dir/lib_path
           return from_file(path) if path.file?
@@ -47,8 +48,10 @@ module Pirka
         Base64.urlsafe_encode64(release_identifier)
       end
 
-      def basename(release_identifier)
-        basename_without_ext(release_identifier) + EXT
+      def filepath(release_identifier)
+        name = basename_without_ext(release_identifier)
+        name.insert(DIR_LENGTH, "/") if name.length > DIR_LENGTH
+        name + EXT
       end
 
       # @param [Pathname, String] path
@@ -90,16 +93,16 @@ module Pirka
       self.class.directories(user)
     end
 
-    def basename
+    def filepath
       raise "Release Identifier is not set" unless @metadata["Release Identifier"]
-      self.class.basename(@metadata["Release Identifier"])
+      self.class.filepath(@metadata["Release Identifier"])
     end
 
     # @param [Pathname, String, nil] path File path to save library data.
-    #   When `nil` is passwd, default directory + basename determined by Release Identifier is used
+    #   When `nil` is passwd, default directory + filepath determined by Release Identifier is used
     # @return [Pathname] File path that library data was saved
     def save(path = nil)
-      path = directories.first/basename unless path
+      path = directories.first/filepath unless path
       path = Pathname(path) unless path.respond_to? :write
       path.dirname.mkpath unless path.dirname.directory?
       path.write(to_yaml)
