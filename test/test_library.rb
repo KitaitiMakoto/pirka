@@ -101,6 +101,22 @@ EOY
     end
   end
 
+  def test_save_to_specified_directory_when_initialized_with_directory
+    Dir.mktmpdir "pirka" do |dir|
+      library = Pirka::Library.new(directory: dir)
+      library.metadata["Release Identifier"] = "abc"
+      library.metadata["title"] = "abc"
+      library.codelist[EPUB::CFI("/6/30!/4/2/58/2")] = {"language" => "Nginx"}
+      library.codelist[EPUB::CFI("/6/31!/4/2/56/2")] = {"language" => "Nginx"}
+      library.codelist[EPUB::CFI("/6/30!/4/2/56/2")] = {"language" => "Nginx"}
+
+      library.save
+      path = Pathname.new("#{dir}/YWJj.yaml")
+      assert_path_exist path.to_path
+      assert_equal @yaml, path.read
+    end
+  end
+
   def test_find_by_release_identifier
     Dir.mktmpdir "pirka" do |dir|
       path = Pathname.new(dir)/"pirka/YWJj.yaml"
