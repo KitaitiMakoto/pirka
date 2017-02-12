@@ -39,28 +39,28 @@ module Pirka
         library = find_library(epub.unique_identifier, epub.modified)
         raise RuntimeError, "Cannot find code list for #{epub.release_identifier}(#{epub_path})" unless library
 
-        need_save = add_css_file(epub) + highlight_contents(epub, library)
+        css_item = add_css_file(epub)
+        need_save = highlight_contents(epub, library)
+        need_save << css_item
         need_save.uniq!
         update_modified_date(epub, Time.now)
 
         save_file epub, need_save
       end
 
+      # @param [EPUB::Book, EPUB::Book::Features] epub
+      # @return [EPUB::Publication::Package::Manifest::Item] item indicating added CSS file
       def add_css_file(epub)
         rootfile_path = DUMMY_ORIGIN + epub.ocf.container.rootfile.full_path
         style = Rouge::Theme.find(THEME).new(scope: SCOPE).render
-        need_save = []
 
-        epub.package.manifest.make_item do |item|
+        epub.package.manifest.make_item {|item|
           item.href = (DUMMY_ORIGIN + CSS_PATH).route_from(rootfile_path)
           # IMPROVEMENT: Want to call item.entry_name = css_path
           item.media_type = 'text/css'
           item.id = CSS_PATH.gsub('/', '-') # @todo Avoid conflict with existing items
           item.content = style
-          need_save << item
-        end
-
-        need_save
+        }
       end
 
       # @todo Do the best when file for release identifier is not find but for unique identifier found
