@@ -89,7 +89,7 @@ EOY
       ensure
         ENV["XDG_DATA_HOME"] = xdh
       end
-      path = Pathname.new(dir)/"pirka/YWJj.yaml"
+      path = Pathname.new(dir)/"pirka/local/YWJj.yaml"
       assert_path_exist path
 
       data = YAML.load_file(path)
@@ -135,7 +135,7 @@ EOY
 
   def test_find_by_release_identifier
     Dir.mktmpdir "pirka" do |dir|
-      path = Pathname.new(dir)/"pirka/YWJj.yaml"
+      path = Pathname.new(dir)/"pirka/local/YWJj.yaml"
       path.dirname.mkpath
       path.write(@yaml)
       xdh = ENV["XDG_DATA_HOME"]

@@ -10,7 +10,7 @@ module Pirka
   # 
   # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   class Library
-    DIR_NAME = "pirka"
+    DIR_NAME = "pirka/local"
     EXT = ".yaml"
     SUBDIR_LENGTH = 4
     XDG_DATA_HOME = Pathname.new(".local/share")
