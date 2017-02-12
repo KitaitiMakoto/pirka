@@ -11,6 +11,7 @@ module Pirka
   class App
     class Highlight
       PROGRAM_NAME = "highlight"
+      DESCRIPTION = "Highlights source code in EPUB file"
 
       def initialize
         @library_path = nil
@@ -140,6 +141,14 @@ module Pirka
       # @todo scope
       def parse_options!(argv)
         parser = OptionParser.new {|opt|
+          opt.program_name = "#{opt.program_name} [global options] #{PROGRAM_NAME}"
+          opt.banner = <<EOB
+#{DESCRIPTION}
+
+Usage: #{opt.program_name} [options] EPUB_FILE
+EOB
+
+          opt.separator ""
           opt.on "-l", "--library=FILE", "library file", Pathname do |path|
             @library_path = path
           end

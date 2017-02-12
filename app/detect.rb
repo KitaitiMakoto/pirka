@@ -11,6 +11,7 @@ module Pirka
   class App
     class Detect
       PROGRAM_NAME = "detect"
+      DESCRIPTION = "Detects source code from EPUB file and generate library file"
 
       def initialize
         @library_path = nil
@@ -103,6 +104,14 @@ module Pirka
 
       def parse_options!(argv)
         parser = OptionParser.new {|opt|
+          opt.program_name = "#{opt.program_name} [global options] #{PROGRAM_NAME}"
+          opt.banner = <<EOB
+#{DESCRIPTION}
+
+Usage: #{opt.program_name} [options] EPUB_FILE
+EOB
+
+          opt.separator ""
           opt.on "-i", "--interactive" do
             @interactive = true
           end
