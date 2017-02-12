@@ -28,14 +28,14 @@ codelist:
 EOY
   end
 
-  def test_from_hash
-    actual = Pirka::Library.from_hash(YAML.load(@yaml))
+  def test_load_hash
+    actual = Pirka::Library.load_hash(YAML.load(@yaml))
     assert_equal @library.metadata, actual.metadata
     assert_equal @library.each.to_a, actual.each.to_a
   end
 
-  def test_from_file
-    actual = Pirka::Library.from_file(@fixure_path)
+  def test_load_file
+    actual = Pirka::Library.load_file(@fixure_path)
     assert_equal @library.metadata, actual.metadata
     assert_equal @library.each.to_a, actual.each.to_a
   end

@@ -66,7 +66,7 @@ module Pirka
 
       # @todo Do the best when file for release identifier is not find but for unique identifier found
       def find_library(unique_identifier, modified)
-        @library_path ? Library.from_file(@library_path) :
+        @library_path ? Library.load_file(@library_path) :
           Library.find_by_release_identifier("#{unique_identifier}@#{modified}")
       end
 

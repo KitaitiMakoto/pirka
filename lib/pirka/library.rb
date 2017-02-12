@@ -45,7 +45,7 @@ module Pirka
         lib_path = filepath(release_identifier)
         directories.each do |dir|
           path = dir/lib_path
-          return from_file(path) if path.file?
+          return load_file(path) if path.file?
         end
         nil
       end
@@ -66,13 +66,13 @@ module Pirka
 
       # @param [Pathname, String] path
       # @return [Library]
-      def from_file(path)
-        from_hash(YAML.load_file(path.to_s))
+      def load_file(path)
+        load_hash(YAML.load_file(path.to_s))
       end
 
       # @param [Hash] h
       # @return [Library]
-      def from_hash(h)
+      def load_hash(h)
         library = new
 
         h.each_pair do |key, value|
