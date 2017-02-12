@@ -106,7 +106,7 @@ module Pirka
           opt.on "-i", "--interactive" do
             @interactive = true
           end
-          opt.on "-l", "--library=FILE", "File to save library data", Pathname do |path|
+          opt.on "-o", "--output=FILE", "File to save library data", Pathname do |path|
             @library_path = path
           end
         }
