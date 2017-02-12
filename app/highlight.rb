@@ -13,6 +13,11 @@ module Pirka
       PROGRAM_NAME = "highlight"
       DESCRIPTION = "Highlights source code in EPUB file"
 
+      DUMMY_ORIGIN = Addressable::URI.parse("file:///")
+      CSS_PATH = "pirka/style.css" # @todo Avoid conflict with existing item by other than Pirka
+      SCOPE = "code"
+      THEME = "github"
+
       def initialize
         @library_path = nil
       end
@@ -42,19 +47,15 @@ module Pirka
       end
 
       def add_css_file(epub)
-        dummy_origin = Addressable::URI.parse('file:///')
-        rootfile_path = dummy_origin + epub.ocf.container.rootfile.full_path
-        css_path = "pirka/style.css" # @todo Avoid overwriting existing file other than Pirka's
-        theme = "github"
-        scope = "code"
-        style = Rouge::Theme.find(theme).new(scope: scope).render
+        rootfile_path = DUMMY_ORIGIN + epub.ocf.container.rootfile.full_path
+        style = Rouge::Theme.find(THEME).new(scope: SCOPE).render
         need_save = []
 
         epub.package.manifest.make_item do |item|
-          item.href = Addressable::URI.parse((dummy_origin + css_path).route_from(rootfile_path)) # IMPROVEMENT: Less need to call Addressable::URI.parse explicitly
+          item.href = (DUMMY_ORIGIN + CSS_PATH).route_from(rootfile_path)
           # IMPROVEMENT: Want to call item.entry_name = css_path
           item.media_type = 'text/css'
-          item.id = css_path.gsub('/', '-') # @todo Avoid conflict with existing items
+          item.id = CSS_PATH.gsub('/', '-') # @todo Avoid conflict with existing items
           item.content = style
           need_save << item
         end
@@ -74,10 +75,6 @@ module Pirka
 
         formatter = Rouge::Formatters::HTML.new(wrap: false)
 
-        # @todo Refactor
-        dummy_origin = Addressable::URI.parse('file:///')
-        css_path = "pirka/style.css" # @todo Avoid overwriting existing file other than Pirka's
-
         library.codelist.each.reverse_each do |(cfi, data)|
           lang = data["language"]
           unless lang
@@ -96,8 +93,8 @@ module Pirka
 
           link = doc.css('#pirka').first # @todo Avoid conflict with existing link
           unless link
-            item_entry_name = dummy_origin + item.entry_name
-            entry_name = dummy_origin + css_path
+            item_entry_name = DUMMY_ORIGIN + item.entry_name
+            entry_name = DUMMY_ORIGIN + CSS_PATH
             href = entry_name.route_from(item_entry_name)
             link = Nokogiri::XML::Node.new('link', doc)
             link['href'] = href
