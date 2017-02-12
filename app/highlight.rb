@@ -74,7 +74,7 @@ module Pirka
       def highlight_contents(epub, css_item, library)
         need_save = []
 
-        formatter = Rouge::Formatters::HTML.new(wrap: false)
+        formatter = Rouge::Formatters::HTML.new
 
         library.each.reverse_each do |(cfi, data)|
           lang = data["language"]
