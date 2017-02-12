@@ -134,13 +134,18 @@ module Pirka
       end
     end
 
-    # @return [String]
-    def to_yaml
+    # @return [Hash]
+    def to_h
       metadata.merge({
         "codelist" => each.with_object({}) {|(cfi, value), list|
           list[cfi.to_fragment] = value
         }
-      }).to_yaml
+      })
+    end
+
+    # @return [String]
+    def to_yaml
+      to_h.to_yaml
     end
   end
 end
