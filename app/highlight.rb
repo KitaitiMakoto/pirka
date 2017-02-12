@@ -75,7 +75,7 @@ module Pirka
 
         formatter = Rouge::Formatters::HTML.new(wrap: false)
 
-        library.codelist.each.reverse_each do |(cfi, data)|
+        library.each.reverse_each do |(cfi, data)|
           lang = data["language"]
           unless lang
             warn "Language for #{cfi} is not detected"
