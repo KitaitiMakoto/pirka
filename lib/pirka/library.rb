@@ -18,10 +18,11 @@ module Pirka
     XDG_DATA_DIRS = [Pathname.new("/usr/local/share"), Pathname.new("/usr/share")]
     DATA_DIRS = XDG_DATA_DIRS.collect {|dir| dir/DIR_NAME}
 
+    @data_home = nil
     @additional_directories = []
 
     class << self
-      attr_accessor :additional_directories
+      attr_accessor :data_home, :additional_directories
 
       # @return [Array<Pathname>]
       def directories(user = nil)
@@ -31,7 +32,7 @@ module Pirka
         data_home = ENV["XDG_DATA_HOME"] ?
                       Pathname.new(ENV["XDG_DATA_HOME"])/DIR_NAME :
                       Pathname.new(Dir.home(user))/DATA_HOME
-        @additional_directories + [data_home] + data_dirs
+        ([@data_home, data_home] + @additional_directories + data_dirs).compact
       end
 
       # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html

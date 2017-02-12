@@ -6,6 +6,7 @@ require "epub/parser/cfi"
 
 class TestLibrary < Test::Unit::TestCase
   def setup
+    Pirka::Library.data_home = nil
     Pirka::Library.additional_directories.clear
     @library = Pirka::Library.new
     @library.metadata["Release Identifier"] = "abc"
@@ -102,9 +103,9 @@ EOY
     end
   end
 
-  def test_save_to_specified_directory_when_additional_directory_is_prepended
+  def test_save_to_specified_directory_when_data_home_is_specified
     Dir.mktmpdir "pirka" do |dir|
-      Pirka::Library.additional_directories << Pathname.new(dir)
+      Pirka::Library.data_home = Pathname.new(dir)
       library = Pirka::Library.new
       library.metadata["Release Identifier"] = "abc"
       library.metadata["title"] = "abc"
@@ -122,7 +123,7 @@ EOY
 
   def test_save_makes_subdirectory_when_basename_is_longer_than_4_characters
     Dir.mktmpdir "pirka" do |dir|
-      Pirka::Library.additional_directories << Pathname.new(dir)
+      Pirka::Library.data_home = Pathname.new(dir)
       library = Pirka::Library.new
       library.metadata["Release Identifier"] = "abcd"
 

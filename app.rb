@@ -25,7 +25,10 @@ EOB
 
         opt.separator ""
         opt.separator "Global options:"
-        opt.on "-d", "--directory=DIRECTORY", "Directory to save and read library data. Prepended to default directories.", "Specify multiple times to prepend multiple directories.", Pathname do |path|
+        opt.on "-s", "--data-home=DIRECTORY", "Directory to *SAVE* library data", Pathname do |path|
+          Library.data_home = path
+        end
+        opt.on "-d", "--directory=DIRECTORY", "Directory to *SEARCH* library data.", "Specify multiple times to add multiple directories.", Pathname do |path|
           Library.additional_directories << path
         end
 
