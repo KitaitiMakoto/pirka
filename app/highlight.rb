@@ -84,7 +84,7 @@ module Pirka
             warn "Language for #{cfi} is not detected"
             next
           end
-          itemref, elem = EPUB::Searcher.search_by_cfi(epub, cfi)
+          itemref, elem, _ = EPUB::Searcher.search_by_cfi(epub, cfi)
           item = itemref.item
           doc = elem.document
           lexer = Rouge::Lexer.find(lang) || Rouge::Lexer.guess(source: elem.content)
