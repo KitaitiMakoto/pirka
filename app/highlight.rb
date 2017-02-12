@@ -41,7 +41,7 @@ module Pirka
         raise RuntimeError, "Cannot find code list for #{epub.release_identifier}(#{epub_path})" unless library
 
         css_item = add_css_file(epub)
-        need_save = highlight_contents(epub, library)
+        need_save = highlight_contents(epub, css_item, library)
         need_save << css_item
         need_save.uniq!
         update_modified_date(epub, Time.now)
@@ -71,7 +71,7 @@ module Pirka
       end
 
       # @todo Consider descendant elements of code
-      def highlight_contents(epub, library)
+      def highlight_contents(epub, css_item, library)
         need_save = []
 
         formatter = Rouge::Formatters::HTML.new(wrap: false)
@@ -101,7 +101,7 @@ module Pirka
           link = doc.at('#pirka') # @todo Avoid conflict with existing link
           unless link
             item_entry_name = DUMMY_ORIGIN + item.entry_name
-            entry_name = DUMMY_ORIGIN + CSS_PATH
+            entry_name = DUMMY_ORIGIN + css_item.entry_name
             href = entry_name.route_from(item_entry_name)
             link = Nokogiri::XML::Node.new('link', doc)
             link['href'] = href
