@@ -15,7 +15,8 @@ module Pirka
 
       DUMMY_ORIGIN = Addressable::URI.parse("file:///")
       CSS_PATH = "pirka/style.css" # @todo Avoid conflict with existing item by other than Pirka
-      SCOPE = "code"
+      CSS_CLASS_NAME = "pirka"
+      SCOPE = "code.#{CSS_CLASS_NAME}"
       THEME = "github"
 
       def initialize
@@ -90,6 +91,12 @@ module Pirka
             next
           end
           elem.inner_html = formatter.format(lexer.lex(elem.content)) # @todo Consider the case `elem` has descendants
+
+          classes = (elem["class"] || "").split(/\s+/)
+          unless classes.include? CSS_CLASS_NAME
+            classes << CSS_CLASS_NAME
+            elem["class"] = classes.join(" ")
+          end
 
           link = doc.css('#pirka').first # @todo Avoid conflict with existing link
           unless link
