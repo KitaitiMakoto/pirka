@@ -98,7 +98,7 @@ module Pirka
             elem["class"] = classes.join(" ")
           end
 
-          link = doc.css('#pirka').first # @todo Avoid conflict with existing link
+          link = doc.at('#pirka') # @todo Avoid conflict with existing link
           unless link
             item_entry_name = DUMMY_ORIGIN + item.entry_name
             entry_name = DUMMY_ORIGIN + CSS_PATH
