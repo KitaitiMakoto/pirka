@@ -27,8 +27,8 @@ module Pirka
       # @return [Array<Pathname>]
       def directories(user = nil)
         data_dirs = ENV["XDG_DATA_DIRS"] ?
-                 ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)/DIR_NAME} :
-                 DATA_DIRS
+                      ENV["XDG_DATA_DIRS"].split(":").collect {|dir| Pathname.new(dir)/DIR_NAME} :
+                      DATA_DIRS
         data_home = ENV["XDG_DATA_HOME"] ?
                       Pathname.new(ENV["XDG_DATA_HOME"])/DIR_NAME :
                       Pathname.new(Dir.home(user))/DATA_HOME
