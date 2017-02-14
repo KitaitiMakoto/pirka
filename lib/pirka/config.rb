@@ -21,8 +21,8 @@ module Pirka
                         ENX["XDG_CONFIG_DIR"].split(":").collect {|dir| Pathname.new(dir)/FILE_NAME} :
                         CONFIG_DIRS
         config_home = ENV["XDG_CONFIG_HOME"] ?
-                        Pathname.new(ENV["XDG_CONFIG_HOME"])/FILE_NAME :
-                        Pathname.new(Dir.home(user))/FILE_NAME
+                        Pathname.new(ENV["XDG_CONFIG_HOME"]) :
+                        Pathname.new(Dir.home(user))/XDG_CONFIG_HOME
         ([@config_home, config_home] + @additional_directories + config_dirs).compact
       end
 
