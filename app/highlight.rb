@@ -156,8 +156,8 @@ module Pirka
           end
         end
       end
-    end
 
-    APPS[Highlight::PROGRAM_NAME] = Highlight
+      APPS[PROGRAM_NAME] = self
+    end
   end
 end

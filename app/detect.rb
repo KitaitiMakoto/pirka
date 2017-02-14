@@ -143,8 +143,8 @@ module Pirka
         $stderr.print "Which language?  "
         $stdin.gets.chomp
       end
-    end
 
-    APPS[Detect::PROGRAM_NAME] = Detect
+      APPS[PROGRAM_NAME] = self
+    end
   end
 end

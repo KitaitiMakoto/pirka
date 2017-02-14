@@ -57,8 +57,8 @@ module Pirka
         raise "Failed to execute \`#{command}\`" unless $CHILD_STATUS.success?
         output
       end
-    end
 
-    APPS[Update::PROGRAM_NAME] = Update
+      APPS[PROGRAM_NAME] = self
+    end
   end
 end
