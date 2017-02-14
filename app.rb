@@ -56,6 +56,9 @@ EOB
       @config ||= Config.new
       @config.data_home = @tmp_opts["data_home"] if @tmp_opts["data_home"]
       @config.additional_directories = @tmp_opts["additional_directories"] unless @tmp_opts["additional_directories"].empty?
+
+      Library.data_home = @config.data_home
+      Library.additional_directories = @config.additional_directories
     end
   end
 end
