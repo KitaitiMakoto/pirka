@@ -43,7 +43,7 @@ module Pirka
       # @param [String] release_identifier
       # @return [Library, nil]
       def find_by_release_identifier(release_identifier)
-        lib_path = filepath(release_identifier)
+        lib_path = filename(release_identifier)
         directories.each do |dir|
           path = dir/lib_path
           return load_file(path) if path.file?
@@ -59,7 +59,7 @@ module Pirka
         Base64.urlsafe_encode64(release_identifier)
       end
 
-      def filepath(release_identifier)
+      def filename(release_identifier)
         name = basename_without_ext(release_identifier)
         name.insert(SUBDIR_LENGTH, "/") if name.length > SUBDIR_LENGTH
         name + EXT
@@ -102,19 +102,19 @@ module Pirka
       self.class.data_directory(user)
     end
 
-    def filepath
+    def filename
       raise "Release Identifier is not set" unless @metadata["Release Identifier"]
-      self.class.filepath(@metadata["Release Identifier"])
+      self.class.filename(@metadata["Release Identifier"])
     end
 
     # @param [Pathname, String, nil] path File path to save library data.
-    #   When `nil` is passwd, default directory + filepath determined by Release Identifier is used
+    #   When `nil` is passwd, default directory + filename determined by Release Identifier is used
     # @return [Pathname] File path that library data was saved
     def save(path = nil)
-      path = data_directory/filepath unless path
-      path = Pathname(path) unless path.respond_to? :write
+      path = data_directory/filename unless path
+      path = Pathname(path)
       path.dirname.mkpath unless path.dirname.directory?
-      path.write(to_yaml)
+      path.write to_yaml
       path
     end
 

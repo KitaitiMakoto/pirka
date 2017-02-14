@@ -8,6 +8,7 @@ module Pirka
 
       private
 
+      # @todo Consider the case the subcommand has no option
       def parse_options!(argv)
         parser = OptionParser.new {|opt|
           opt.program_name = "#{opt.program_name} [global options] #{self.class::PROGRAM_NAME}"
