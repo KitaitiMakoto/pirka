@@ -6,12 +6,16 @@ require "epub/maker"
 require "rouge"
 require "rouge/lexers/fluentd"
 require "pirka/library"
+require_relative "subcommand"
 
 module Pirka
   class App
     class Highlight
+      include Subcommand
+
       PROGRAM_NAME = "highlight"
       DESCRIPTION = "Highlights source code in EPUB file"
+      ARGS = "EPUB_FILE"
 
       DUMMY_ORIGIN = Addressable::URI.parse("file:///")
       CSS_PATH = "pirka/style.css" # @todo Avoid conflict with existing item by other than Pirka
@@ -19,7 +23,8 @@ module Pirka
       SCOPE = "code.#{CSS_CLASS_NAME}"
       THEME = "github"
 
-      def initialize
+      def initialize(config)
+        super
         @library_path = nil
       end
 
@@ -144,20 +149,12 @@ module Pirka
       # @todo CSS file path
       # @todo scope
       def parse_options!(argv)
-        parser = OptionParser.new {|opt|
-          opt.program_name = "#{opt.program_name} [global options] #{PROGRAM_NAME}"
-          opt.banner = <<EOB
-#{DESCRIPTION}
-
-Usage: #{opt.program_name} [options] EPUB_FILE
-EOB
-
+        super do |opt|
           opt.separator ""
           opt.on "-l", "--library=FILE", "library file", Pathname do |path|
             @library_path = path
           end
-        }
-        parser.order! argv
+        end
       end
     end
 
