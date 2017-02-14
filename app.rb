@@ -28,7 +28,7 @@ module Pirka
         opt.banner = <<EOB
 #{DESCRIPTION}
 
-Usage: #{opt.program_name} [global options] [<command>] [options]"
+Usage: #{opt.program_name} [global options] [<command>] [options]
 EOB
 
         opt.separator ""
