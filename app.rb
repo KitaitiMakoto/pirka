@@ -68,3 +68,4 @@ end
 require_relative "app/highlight"
 require_relative "app/detect"
 require_relative "app/update"
+require_relative "app/lib"
