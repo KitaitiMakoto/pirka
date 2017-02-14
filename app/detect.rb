@@ -6,14 +6,20 @@ require "epub/searcher"
 require "rouge"
 require "rouge/lexers/fluentd"
 require "pirka/library"
+require_relative "subcommand"
 
 module Pirka
   class App
     class Detect
+      include Subcommand
+
       PROGRAM_NAME = "detect"
       DESCRIPTION = "Detects source code from EPUB file and generate library file"
+      ARGS = ""
 
-      def initialize
+      def initialize(config)
+        super
+
         @library_path = nil
         @interactive = false
 
@@ -103,14 +109,7 @@ module Pirka
       private
 
       def parse_options!(argv)
-        parser = OptionParser.new {|opt|
-          opt.program_name = "#{opt.program_name} [global options] #{PROGRAM_NAME}"
-          opt.banner = <<EOB
-#{DESCRIPTION}
-
-Usage: #{opt.program_name} [options] EPUB_FILE
-EOB
-
+        super do |opt|
           opt.separator ""
           opt.on "-i", "--interactive" do
             @interactive = true
@@ -118,8 +117,7 @@ EOB
           opt.on "-o", "--output=FILE", "File to save library data", Pathname do |path|
             @library_path = path
           end
-        }
-        parser.order! argv
+        end
       end
 
       def show_item(item)
