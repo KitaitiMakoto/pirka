@@ -13,7 +13,7 @@ module Pirka
     class Detect
       PROGRAM_NAME = "detect"
       DESCRIPTION = "Detects source code from EPUB file and generate library file"
-      ARGS = ""
+      ARGS = %w[EPUB_FILE]
 
       include Subcommand
 

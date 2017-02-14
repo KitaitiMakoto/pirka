@@ -13,7 +13,7 @@ module Pirka
     class Highlight
       PROGRAM_NAME = "highlight"
       DESCRIPTION = "Highlights source code in EPUB file"
-      ARGS = "EPUB_FILE"
+      ARGS = %w[EPUB_FILE]
 
       include Subcommand
 

@@ -9,7 +9,6 @@ module Pirka
     class Update
       PROGRAM_NAME = "update"
       DESCRIPTION = "Update library files by remote files"
-      ARGS = ""
 
       include Subcommand
 
