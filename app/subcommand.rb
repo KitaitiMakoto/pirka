@@ -16,7 +16,7 @@ module Pirka
 
 Usage: #{opt.program_name} [options] #{self.class::ARGS}
 EOB
-          yield opt
+          yield opt if block_given?
         }
         parser.order! argv
       end
