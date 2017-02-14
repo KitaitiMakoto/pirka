@@ -1,6 +1,12 @@
 module Pirka
   class App
     module Subcommand
+      class << self
+        def included(base)
+          APPS[base::PROGRAM_NAME] = base
+        end
+      end
+
       # @param [Config]
       def initialize(config)
         @config = config

@@ -11,11 +11,11 @@ require_relative "subcommand"
 module Pirka
   class App
     class Highlight
-      include Subcommand
-
       PROGRAM_NAME = "highlight"
       DESCRIPTION = "Highlights source code in EPUB file"
       ARGS = "EPUB_FILE"
+
+      include Subcommand
 
       DUMMY_ORIGIN = Addressable::URI.parse("file:///")
       CSS_PATH = "pirka/style.css" # @todo Avoid conflict with existing item by other than Pirka
@@ -156,8 +156,6 @@ module Pirka
           end
         end
       end
-
-      APPS[PROGRAM_NAME] = self
     end
   end
 end

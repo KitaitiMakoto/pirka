@@ -7,11 +7,11 @@ require_relative "subcommand"
 module Pirka
   class App
     class Update
-      include Subcommand
-
       PROGRAM_NAME = "update"
       DESCRIPTION = "Update library files by remote files"
       ARGS = ""
+
+      include Subcommand
 
       URI = ::URI.parse("https://gitlab.com/KitaitiMakoto/pirka-library.git")
 
@@ -57,8 +57,6 @@ module Pirka
         raise "Failed to execute \`#{command}\`" unless $CHILD_STATUS.success?
         output
       end
-
-      APPS[PROGRAM_NAME] = self
     end
   end
 end

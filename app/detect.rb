@@ -11,11 +11,11 @@ require_relative "subcommand"
 module Pirka
   class App
     class Detect
-      include Subcommand
-
       PROGRAM_NAME = "detect"
       DESCRIPTION = "Detects source code from EPUB file and generate library file"
       ARGS = ""
+
+      include Subcommand
 
       def initialize(config)
         super
@@ -143,8 +143,6 @@ module Pirka
         $stderr.print "Which language?  "
         $stdin.gets.chomp
       end
-
-      APPS[PROGRAM_NAME] = self
     end
   end
 end
