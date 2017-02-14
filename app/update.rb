@@ -23,8 +23,12 @@ module Pirka
           update_repository(URI, dir)
         else
           clone_repository(URI, dir)
+          @config.additional_directories << dir
+          @config.save
+          $stderr.puts "Library was cloned to:"
+          $stdout.puts dir
+          $stderr.puts "and added to config file #{@config.filepath.to_s.dump}"
         end
-        $stdout.puts dir
       end
 
       def ensure_git_command
