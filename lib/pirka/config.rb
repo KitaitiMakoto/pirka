@@ -90,5 +90,19 @@ module Pirka
       path.write to_yaml
       path
     end
+
+    def to_h
+      h = {}
+      h["data_home"] = @data_home.to_path if @data_home
+      %w[additional_directories library_repositories].each do |key|
+        value = __send__(key)
+        h[key] = value.collect(&:to_path) unless value.empty?
+      end
+      h
+    end
+
+    def to_yaml
+      to_h.to_yaml
+    end
   end
 end
