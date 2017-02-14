@@ -55,7 +55,7 @@ EOB
       parser.order! argv
       @config ||= Config.new
       @config.data_home = @tmp_opts["data_home"] if @tmp_opts["data_home"]
-      @config.additional_directories = @tmp_opts["additional_directories"] if @tmp_opts["additional_directories"]
+      @config.additional_directories = @tmp_opts["additional_directories"] unless @tmp_opts["additional_directories"].empty?
     end
   end
 end
