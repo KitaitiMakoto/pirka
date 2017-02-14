@@ -18,7 +18,7 @@ module Pirka
 
       def directories(user = nil)
         config_dirs = ENV["XDG_CONFIG_DIRS"] ?
-                        ENX["XDG_CONFIG_DIR"].split(":").collect {|dir| Pathname.new(dir)/FILE_NAME} :
+                        ENX["XDG_CONFIG_DIR"].split(":").collect {|dir| Pathname.new(dir)} :
                         CONFIG_DIRS
         config_home = ENV["XDG_CONFIG_HOME"] ?
                         Pathname.new(ENV["XDG_CONFIG_HOME"]) :
