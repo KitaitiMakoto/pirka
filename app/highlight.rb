@@ -43,7 +43,7 @@ module Pirka
         end
         epub = EPUB::Parser.parse(epub_path)
         library = find_library(epub.unique_identifier, epub.modified)
-        raise RuntimeError, "Cannot find code list for #{epub.release_identifier}(#{epub_path})" unless library
+        raise RuntimeError, "Cannot find code list #{Library.filename(epub.release_identifier)} for #{epub.release_identifier}(#{epub_path}) in any directory of #{Library.directories.join(", ")}" unless library
 
         css_item = add_css_file(epub)
         need_save = highlight_contents(epub, css_item, library)
