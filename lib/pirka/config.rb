@@ -31,7 +31,17 @@ module Pirka
       end
 
       def load_file(path)
-        load_hash(YAML.load_file(path))
+        load_hash(
+          YAML.load_file(path).each_with_object({}) {|(key, value), h|
+            h[key] = case key
+                     when "data_home"
+                       Pathname(value)
+                     when "additional_directories", "library_repositories"
+                       value.collect {|val| Pathname(val)}
+                     else
+                       value
+                     end
+          })
       end
 
       def load_hash(h)
