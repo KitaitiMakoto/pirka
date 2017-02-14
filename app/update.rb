@@ -2,12 +2,16 @@ require "English"
 require "pathname"
 require "uri"
 require "pirka/library"
+require_relative "subcommand"
 
 module Pirka
   class App
     class Update
+      include Subcommand
+
       PROGRAM_NAME = "update"
       DESCRIPTION = "Update library files by remote files"
+      ARGS = ""
 
       URI = ::URI.parse("https://gitlab.com/KitaitiMakoto/pirka-library.git")
 
@@ -41,20 +45,6 @@ module Pirka
         Dir.chdir dir do
           run_command "git fetch origin master && git checkout origin/master"
         end
-      end
-
-      private
-
-      def parse_options!(argv)
-        parser = OptionParser.new {|opt|
-          opt.program_name = "#{opt.program_name} [global options] #{PROGRAM_NAME}"
-          opt.banner = <<EOB
-#{DESCRIPTION}
-
-Usage: #{opt.program_name} [options]
-EOB
-        }
-        parser.order! argv
       end
 
       def run_command(command)
