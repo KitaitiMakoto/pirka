@@ -1,30 +1,38 @@
-# pirka
+pirka
+=====
 
 * [Homepage](http://www.rubydoc.info/gems/pirka)
 * [Documentation](http://rubydoc.info/gems/pirka/frames)
 * [Email](mailto:KitaitiMakoto at gmail.com)
 
-## Description
+Description
+-----------
 
 Pirka highlights source code syntax in EPUB books
 
-## Features
+Features
+--------
 
-## Examples
+Examples
+--------
 
     require 'pirka'
 
-## Requirements
+Requirements
+------------
 
-## Install
+Install
+-------
 
     $ gem install pirka
 
-## Synopsis
+Synopsis
+--------
 
     $ pirka
 
-## Copyright
+Copyright
+---------
 
 Copyright (c) 2017 KITAITI Makoto
 
