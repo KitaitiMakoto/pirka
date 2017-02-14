@@ -22,6 +22,8 @@ module Pirka
     private
 
     def parse_options!(argv)
+      config_path = Config.filepath
+
       parser = OptionParser.new {|opt|
         opt.version = Pirka::VERSION
 
@@ -34,7 +36,7 @@ EOB
         opt.separator ""
         opt.separator "Global options:"
         opt.on "-c", "--config=FILE", "Config file. Defaults to #{Config.filepath}", Pathname do |path|
-          @config = Config.load_file(path)
+          config_path = path
         end
         opt.on "-s", "--data-home=DIRECTORY", "Directory to *SAVE* library data", Pathname do |path|
           @tmp_opts["data_home"] = path
@@ -53,7 +55,7 @@ EOB
         opt.separator "If command is ommitted, highlight is used with no option"
       }
       parser.order! argv
-      @config ||= Config.new
+      @config = config_path.file? ? Config.load_file(config_path) : Config.new
       @config.data_home = @tmp_opts["data_home"] if @tmp_opts["data_home"]
       @config.additional_directories = @tmp_opts["additional_directories"] unless @tmp_opts["additional_directories"].empty?
 
