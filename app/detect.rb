@@ -5,6 +5,7 @@ require "epub/cfi"
 require "epub/searcher"
 require "rouge"
 require "rouge/lexers/fluentd"
+require "colored"
 require "pirka/library"
 require_relative "subcommand"
 
@@ -26,12 +27,28 @@ module Pirka
         @available_lexers = Rouge::Lexer.all.sort_by(&:tag).each_with_object({}).with_index {|(lexer, lexers), index|
           lexers[(index + 1).to_s] = lexer
         }
+        initial = nil
         @lexers_display = @available_lexers.collect {|(index, lexer)|
-          option = "#{index}) #{lexer.title}"
+          init = lexer.title[0].upcase
+          if initial == init
+            option = ""
+          else
+            option = "\n"
+            initial = init
+          end
+          option << "#{index})".bold << " " << lexer.title
           option << "(#{lexer.aliases.join(', ')})" unless lexer.aliases.empty?
           option
         }.join("  ")
         @commands = ["s) skip", "q) quit", "c) show code", "o) show options"].join("  ")
+        @commands = {
+          "s" => "skip",
+          "q" => "quit",
+          "c" => "show code",
+          "o" => "show options"
+        }.collect {|(key, command)|
+          "#{key})".bold << " " << command
+        }.join("  ")
       end
 
       def run(argv)
@@ -136,6 +153,7 @@ module Pirka
       end
 
       def show_commands
+        $stderr.puts
         $stderr.puts @commands
       end
 
