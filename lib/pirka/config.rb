@@ -36,8 +36,10 @@ module Pirka
             h[key] = case key
                      when "data_home"
                        Pathname(value)
-                     when "additional_directories", "library_repositories"
+                     when "additional_directories"
                        value.collect {|val| Pathname(val)}
+                     when "library_repositories"
+                       value.collect {|val| URI(val)}
                      else
                        value
                      end
@@ -47,7 +49,7 @@ module Pirka
       def load_hash(h)
         config = new
         %w[data_home additional_directories library_repositories].each do |attr|
-          config.__send__("#{attr}=", h[attr])
+          config.__send__("#{attr}=", h[attr]) if h[attr]
         end
         config
       end
@@ -96,7 +98,7 @@ module Pirka
       h["data_home"] = @data_home.to_path if @data_home
       %w[additional_directories library_repositories].each do |key|
         value = __send__(key)
-        h[key] = value.collect(&:to_path) unless value.empty?
+        h[key] = value.collect(&:to_s) unless value.empty?
       end
       h
     end

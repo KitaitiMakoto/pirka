@@ -22,11 +22,17 @@ module Pirka
           update_repository(URI, dir)
         else
           clone_repository(URI, dir)
-          @config.additional_directories << dir
-          @config.save
           $stderr.puts "Library was cloned to:"
           $stdout.puts dir
-          $stderr.puts "and added to config file #{@config.filepath.to_s.dump}"
+          @config.additional_directories << dir
+          @config.library_repositories << URI
+          begin
+            @config.save
+            $stderr.puts "and added to config file #{@config.filepath.to_s.dump}"
+          rescue Errno::EACCESS => error
+            $stderr.puts "Couldn't save config file to #{@config.filepath.to_s.dump}"
+            $stderr.puts error
+          end
         end
       end
 
