@@ -78,6 +78,11 @@ Additionally, you can host library files by your own and make Pirka recognizes i
 Requirements
 ------------
 
+* Ruby 2.2 or later
+* C compiler to compile [Nokogiri][] gem
+
+[Nokogiri]: http://www.nokogiri.org/
+
 Install
 -------
 
