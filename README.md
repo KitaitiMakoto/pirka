@@ -93,6 +93,9 @@ Synopsis
 
     $ pirka
 
+### Make faster ###
+
+
 Copyright
 ---------
 
