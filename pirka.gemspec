@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.license       = "GPL"
   gem.authors       = ["KITAITI Makoto"]
   gem.email         = "KitaitiMakoto@gmail.com"
-  gem.homepage      = "http://www.rubydoc.info/gems/pirka"
+  gem.homepage      = "https://gitlab.com/KitaitiMakoto/pirka"
 
   gem.files         = `git ls-files`.split($/)
 

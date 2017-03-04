@@ -1,8 +1,8 @@
 Pirka
 =====
 
-* [Homepage](http://www.rubydoc.info/gems/pirka)
-* [Documentation](http://rubydoc.info/gems/pirka/frames)
+* [Homepage](https://gitlab.com/KitaitiMakoto/pirka)
+* [Documentation](http://www.rubydoc.info/gems/pirka)
 * [Email](mailto:KitaitiMakoto at gmail.com)
 
 Description
