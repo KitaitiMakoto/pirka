@@ -181,11 +181,6 @@ Install
 
     $ gem install pirka
 
-Synopsis
---------
-
-    $ pirka
-
 ### Make faster ###
 
 
