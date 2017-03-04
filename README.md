@@ -42,6 +42,19 @@ It's a short cut to:
 * file path in EPUB file(zip archive)
 * source code
 
+Example:
+
+      epubcfi(/6/64!/4/2/30/2):              # location
+        language:                            # language name. blank at first
+        item: OEBPS/text/p-003-003.xhtml     # file path in zip archive
+        code: |                              # source code
+          f1 = open("|cat", "w")
+          f2 = open("|sed 's/a/b/'", "w")
+          f1.print "Hello\n"
+          f2.print "abc\n"
+          f1.close
+          f2.close
+
 In Pirka context, the file is called *library*.
 
 `pirka highlight` command determines programming languages of source code according to this file.
