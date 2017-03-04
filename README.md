@@ -183,6 +183,15 @@ Install
 
 ### Make faster ###
 
+By default, Pirka uses [archive-zip][] gem, a pure Ruby implementation, for zip archive but you can make command execution faster by using [Zip/Ruby][] gem, a C implementation. Just install Zip/Ruby:
+
+    $ gem install zipruby
+
+Pirka, actually internally-used [EPUB Parser][], tries to load Zip/Ruby and use it if available.
+
+[archive-zip]: https://github.com/javanthropus/archive-zip
+[Zip/Ruby]: https://bitbucket.org/winebarrel/zip-ruby/wiki/Home
+[EPUB Parser]: http://www.rubydoc.info/gems/epub-parser/file/docs/Home.markdown
 
 Copyright
 ---------
