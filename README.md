@@ -1,4 +1,4 @@
-pirka
+Pirka
 =====
 
 * [Homepage](http://www.rubydoc.info/gems/pirka)
