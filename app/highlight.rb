@@ -6,6 +6,7 @@ require "epub/maker"
 require "rouge"
 require "rouge/lexers/fluentd"
 require "pirka/library"
+require "pirka/highlighter"
 require_relative "subcommand"
 
 module Pirka
@@ -79,7 +80,7 @@ module Pirka
       def highlight_contents(epub, css_item, library)
         need_save = []
 
-        formatter = Rouge::Formatters::HTML.new
+        highlighter = Highlighter::Middleware::Rouge.new(Highlighter.new)
 
         library.each.reverse_each do |(cfi, data)|
           lang = data["language"]
@@ -90,12 +91,8 @@ module Pirka
           itemref, elem, _ = EPUB::Searcher.search_by_cfi(epub, cfi)
           item = itemref.item
           doc = elem.document
-          lexer = Rouge::Lexer.find(lang) || Rouge::Lexer.guess(source: elem.content)
-          unless lexer
-            warn "Cannot find lexer for #{lang}"
-            next
-          end
-          elem.inner_html = formatter.format(lexer.lex(elem.content)) # @todo Consider the case `elem` has descendants
+
+          highlighter.markup elem, lang
 
           classes = (elem["class"] || "").split(/\s+/)
           unless classes.include? CSS_CLASS_NAME
