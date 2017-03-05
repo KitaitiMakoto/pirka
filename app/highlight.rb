@@ -85,8 +85,8 @@ module Pirka
             Highlighter.new),
           class_name: CSS_CLASS_NAME)
         middleware = library.metadata["middleware"]
-        if middleware && !library.metadata["middleware"].empty?
-          highlighter = library.metadata["middleware"].reduce(highlighter) {|highlighter, desc|
+        if middleware && !middleware.empty?
+          highlighter = middleware.reduce(highlighter) {|highlighter, desc|
             params = desc["params"] || {}
             Highlighter::Middleware.const_get(desc["name"]).new(highlighter, params)
           }
