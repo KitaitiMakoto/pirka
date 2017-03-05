@@ -94,24 +94,24 @@ Pirka can be configured by environment variables, config file and command-line o
 
 #### Environment variables ####
 
-XDG_DATA_HOME
+`XDG_DATA_HOME`
 : Affects directory to save library files.
 : Library files are saved to `$XDG_DATA_HOME/pirka/local`
 : The directory is used to search library, too.
 : Default: `$HOME/.local/share`
 
-XDG_DATA_DIRS
+`XDG_DATA_DIRS`
 : Affects directory to save library files.
 : You can specify multiple directory by seperating with a colon like `XDG_DATA_DIRS=/dir1:/dir2`.
 : `/dir1/pirka/local` and `/dir2/pirka/local` are used to search library, for example.
 : Default: `/usr/local/share:/usr/share`
 
-XDG_CONFIG_HOME
+`XDG_CONFIG_HOME`
 : Affects directory to search and save config file.
 : `$XDG_CONFIG_DIRS/pirka.yaml` is recognized as config file.
 : Default: `$HOME/.config`
 
-XDG_CONFIG_DIRS
+`XDG_CONFIG_DIRS`
 : Affects directory to search config file.
 : You can specify multiple directory by seperating with a colon like `XDG_CONFIG_DIRS=/dir1:/dir2`.
 : `/dir1/pirka.yaml` and `/dir2/pirka.yaml` are searched as config file.
@@ -121,16 +121,16 @@ XDG_CONFIG_DIRS
 
 Config file is a YAML file. Properties below are recognized:
 
-data_home
+`data_home`
 : Directory to save and search library files.
 : Default: `$XDG_CONFIG_HOME/pirka/local`
 
-additional_directories
+`additional_directories`
 : Directories to search library files.
 : Expressed by sequence(array).
 : Default: `[]`
 
-library_repositories
+`library_repositories`
 : Git repository URIs used by `pirka lib` command.
 : Expressed by sequence(array).
 : Default: `[]`
