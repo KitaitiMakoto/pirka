@@ -18,11 +18,11 @@ module Pirka
       def parse_options!(argv)
         parser = OptionParser.new {|opt|
           usage = "Usage: #{opt.program_name} [options] #{self.class::PROGRAM_NAME}"
-          usage << " " << self.class::ARGS.join(" ") if self::class.const_defined?(:ARGS)
+          usage << " " << self.class::ARGS.join(" ") if self.class.const_defined?(:ARGS)
 
           opt.program_name = "#{opt.program_name} [global options] #{self.class::PROGRAM_NAME}"
           opt.banner = <<EOB
-#{self::class::DESCRIPTION}
+#{self.class::DESCRIPTION}
 
 #{usage}
 EOB
