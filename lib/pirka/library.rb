@@ -125,10 +125,10 @@ module Pirka
     # @overload each
     #   @return [Enumerator] Enumerator which iterates over cfi and lang
     def each
-      sorted_list = @codelist.each_pair.sort_by {|(cfi, lang)| cfi}
+      sorted_list = @codelist.each_pair.sort_by {|(cfi, data)| cfi}
       if block_given?
-        sorted_list.each do |(cfi, lang)|
-          yield cfi, lang
+        sorted_list.each do |(cfi, data)|
+          yield cfi, data
         end
       else
         sorted_list.each
