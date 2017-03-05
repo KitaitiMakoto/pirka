@@ -68,6 +68,27 @@ module Pirka
           }.join
         end
       end
+
+      class TextLineNum
+        def initialize(highlighter, params = {})
+          @highlighter = highlighter
+          @width = params["width"]
+        end
+
+        def markup(element, lang)
+          lines = []
+          nums = []
+          element.content.each_line do |line|
+            nums << line[0, @width]
+            lines << line[@width..-1]
+          end
+          element.inner_html = lines.join
+          @highlighter.markup element, lang
+          element.inner_html = element.inner_html.lines.collect.with_index {|line, index|
+            nums[index] << line
+          }.join
+        end
+      end
     end
   end
 end
