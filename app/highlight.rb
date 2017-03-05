@@ -20,7 +20,7 @@ module Pirka
       DUMMY_ORIGIN = Addressable::URI.parse("file:///")
       CSS_PATH = "pirka/style.css" # @todo Avoid conflict with existing item by other than Pirka
       CSS_CLASS_NAME = "pirka"
-      SCOPE = "code.#{CSS_CLASS_NAME}"
+      SCOPE = ".#{CSS_CLASS_NAME}"
       THEME = "github"
 
       def initialize(config)
