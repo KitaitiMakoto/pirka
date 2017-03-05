@@ -28,6 +28,8 @@ It's a short cut to:
 
     $ pirka highlight path/to/book.epub
 
+To highlight books, run `pirka update`(see below for details) just after installation because `pirka highlight` requires library files.
+
 ### Detecting source code from EPUB books ###
 
     $ pirka detect path/to/book.epub
