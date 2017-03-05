@@ -102,7 +102,15 @@ module Pirka
           item = itemref.item
           doc = elem.document
 
-          highlighter.markup elem, lang
+          if data["middleware"] && !data["middleware"].empty?
+            additional_highlighter = data["middleware"].reduce(highlighter) {|highlighter, desc|
+              params = desc["params"] || {}
+              Highlighter::Middleware.const_get(desc["name"]).new(highlighter, params)
+            }
+            additional_highlighter.markup elem, lang
+          else
+            highlighter.markup elem, lang
+          end
 
           link = doc.at('#pirka') # @todo Avoid conflict with existing link
           unless link
