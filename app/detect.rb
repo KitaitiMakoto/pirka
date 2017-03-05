@@ -18,11 +18,14 @@ module Pirka
 
       include Subcommand
 
+      SELECTOR = "code"
+
       def initialize(config)
         super
 
         @library_path = nil
         @interactive = false
+        @selector = SELECTOR
 
         @available_lexers = Rouge::Lexer.all.sort_by(&:tag).each_with_object({}).with_index {|(lexer, lexers), index|
           lexers[(index + 1).to_s] = lexer
@@ -71,7 +74,7 @@ module Pirka
         library.metadata["Release Identifier"] = epub.release_identifier
         library.metadata["title"] = epub.title
         catch do |quit|
-          EPUB::Searcher.search_element(epub, css: 'code').each do |result|
+          EPUB::Searcher.search_element(epub, css: @selector).each do |result|
             item = result[:itemref].item
             if @interactive
               catch do |skip|
@@ -133,6 +136,9 @@ module Pirka
           end
           opt.on "-o", "--output=FILE", "File to save library data", Pathname do |path|
             @library_path = path
+          end
+          opt.on "-s", "--selector=SELECTOR", "CSS selector to detect source code element. Defaults to #{SELECTOR.dump}." do |selector|
+            @selector = selector
           end
         end
       end
