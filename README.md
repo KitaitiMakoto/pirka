@@ -71,7 +71,7 @@ You also determine languages interactively. Set `-i`(`--interactive`) option:
 
     $ pirka update
 
-Pirka provides official library files for some EPUB books as Git repository((https://gitlab.com/KitaitiMakoto/pirka-library)[https://gitlab.com/KitaitiMakoto/pirka-library]). `pirka update` command fethes the files from the repository and you benefit from it.
+Pirka provides official library files for some EPUB books as Git repository([https://gitlab.com/KitaitiMakoto/pirka-library](https://gitlab.com/KitaitiMakoto/pirka-library)). `pirka update` command fethes the files from the repository and you benefit from it.
 
 Additionally, you can host library files by your own and make Pirka recognizes it by configuration file. See later section for that.
 
