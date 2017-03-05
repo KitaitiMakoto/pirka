@@ -45,6 +45,29 @@ module Pirka
           element[ATTR_NAME] = class_names.join(" ")
         end
       end
+
+      class LineNum
+        def initialize(highlighter, params = {})
+          @highlighter = highlighter
+          @selector = params["selector"]
+          raise "selector param not specified" unless @selector
+        end
+
+        def markup(element, lang)
+          nums = element.search(@selector)
+          nums.each(&:unlink)
+          @highlighter.markup element, lang
+          return if nums.empty?
+          element.inner_html = element.inner_html.lines.collect.with_index {|line, index|
+            num = nums[index].to_xml
+            if line.length > 1
+              line[0..0] << num << line[1..-1]
+            else
+              num << line
+            end
+          }.join
+        end
+      end
     end
   end
 end
