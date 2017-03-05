@@ -80,7 +80,10 @@ module Pirka
       def highlight_contents(epub, css_item, library)
         need_save = []
 
-        highlighter = Highlighter::Middleware::Rouge.new(Highlighter.new)
+        highlighter = Highlighter::Middleware::ClassName.new(
+          Highlighter::Middleware::Rouge.new(
+            Highlighter.new),
+          class_name: CSS_CLASS_NAME)
 
         library.each.reverse_each do |(cfi, data)|
           lang = data["language"]
@@ -93,12 +96,6 @@ module Pirka
           doc = elem.document
 
           highlighter.markup elem, lang
-
-          classes = (elem["class"] || "").split(/\s+/)
-          unless classes.include? CSS_CLASS_NAME
-            classes << CSS_CLASS_NAME
-            elem["class"] = classes.join(" ")
-          end
 
           link = doc.at('#pirka') # @todo Avoid conflict with existing link
           unless link
