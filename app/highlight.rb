@@ -71,7 +71,7 @@ module Pirka
           EPUB::OCF::PhysicalContainer.adapter = :Zipruby
         rescue LoadError
         end
-        EPUB::Parser.parse(epub_path)
+        EPUB::Parser.parse(path)
       end
 
       # @todo Do the best when file for release identifier is not find but for unique identifier found
