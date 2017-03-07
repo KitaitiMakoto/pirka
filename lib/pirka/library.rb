@@ -10,6 +10,8 @@ module Pirka
   # 
   # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   class Library
+    include Enumerable
+
     DIR_NAME = "pirka/local"
     EXT = ".yaml"
     SUBDIR_LENGTH = 4

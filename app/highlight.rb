@@ -97,7 +97,7 @@ module Pirka
           }
         end
 
-        library.each.reverse_each do |(cfi, data)|
+        library.reverse_each do |(cfi, data)|
           lang = data["language"]
           unless lang
             warn "Language for #{cfi} is not detected"
