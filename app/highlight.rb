@@ -37,7 +37,6 @@ module Pirka
         epub = prepare_epub(epub_path)
 
         library = find_library(epub)
-        raise RuntimeError, "Cannot find code list #{Library.filename(epub.release_identifier)} for #{epub.release_identifier}(#{epub_path}) in any directory of #{Library.directories.join(", ")}" unless library
 
         css_item = add_css_file(epub)
         need_save = highlight_contents(epub, css_item, library)
@@ -76,8 +75,10 @@ module Pirka
 
       # @todo Do the best when file for release identifier is not find but for unique identifier found
       def find_library(epub)
-        @library_path ? Library.load_file(@library_path) :
+        library = @library_path ? Library.load_file(@library_path) :
           Library.find_by_release_identifier(epub.release_identifier)
+        raise RuntimeError, "Cannot find code list #{Library.filename(epub.release_identifier)} for #{epub.release_identifier}(#{epub_path}) in any directory of #{Library.directories.join(", ")}" unless library
+        library
       end
 
       # @todo Consider descendant elements of code
