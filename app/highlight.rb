@@ -34,15 +34,8 @@ module Pirka
         parse_options! argv
 
         epub_path = argv.shift
-        raise ArgumentError, 'Specify EPUB file' unless epub_path
+        epub = prepare_epub(epub_path)
 
-        begin
-          # @todo Make this optional
-          require 'epub/maker/ocf/physical_container/zipruby'
-          EPUB::OCF::PhysicalContainer.adapter = :Zipruby
-        rescue LoadError
-        end
-        epub = EPUB::Parser.parse(epub_path)
         library = find_library(epub)
         raise RuntimeError, "Cannot find code list #{Library.filename(epub.release_identifier)} for #{epub.release_identifier}(#{epub_path}) in any directory of #{Library.directories.join(", ")}" unless library
 
@@ -68,6 +61,17 @@ module Pirka
           item.id = CSS_PATH.gsub('/', '-') # @todo Avoid conflict with existing items
           item.content = style
         }
+      end
+
+      def prepare_epub(path)
+        raise ArgumentError, 'Specify EPUB file' unless path
+        begin
+          # @todo Make this optional
+          require 'epub/maker/ocf/physical_container/zipruby'
+          EPUB::OCF::PhysicalContainer.adapter = :Zipruby
+        rescue LoadError
+        end
+        EPUB::Parser.parse(epub_path)
       end
 
       # @todo Do the best when file for release identifier is not find but for unique identifier found
