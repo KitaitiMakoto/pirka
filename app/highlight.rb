@@ -117,19 +117,7 @@ module Pirka
             highlighter.markup elem, lang
           end
 
-          link = doc.at('#pirka') # @todo Avoid conflict with existing link
-          unless link
-            item_entry_name = DUMMY_ORIGIN + item.entry_name
-            entry_name = DUMMY_ORIGIN + css_item.entry_name
-            href = entry_name.route_from(item_entry_name)
-            link = Nokogiri::XML::Node.new('link', doc)
-            link['href'] = href
-            link['type'] = 'text/css'
-            link['rel'] = 'stylesheet'
-            link['id'] = 'pirka'
-            head = (doc/'head').first
-            head << link
-          end
+          embed_stylesheet_link doc, item, css_item
           item.content = doc.to_xml
           need_save << item
         end
@@ -155,6 +143,22 @@ module Pirka
           epub.package.manifest << item
         end
         epub.package.edit
+      end
+
+      def embed_stylesheet_link(doc, item, css_item)
+        link = doc.at('#pirka') # @todo Avoid conflict with existing link
+        unless link
+          item_entry_name = DUMMY_ORIGIN + item.entry_name
+          entry_name = DUMMY_ORIGIN + css_item.entry_name
+          href = entry_name.route_from(item_entry_name)
+          link = Nokogiri::XML::Node.new('link', doc)
+          link['href'] = href
+          link['type'] = 'text/css'
+          link['rel'] = 'stylesheet'
+          link['id'] = 'pirka'
+          head = (doc/'head').first
+          head << link
+        end
       end
 
       private
