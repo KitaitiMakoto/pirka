@@ -43,7 +43,7 @@ module Pirka
         rescue LoadError
         end
         epub = EPUB::Parser.parse(epub_path)
-        library = find_library(epub.unique_identifier, epub.modified)
+        library = find_library(epub)
         raise RuntimeError, "Cannot find code list #{Library.filename(epub.release_identifier)} for #{epub.release_identifier}(#{epub_path}) in any directory of #{Library.directories.join(", ")}" unless library
 
         css_item = add_css_file(epub)
@@ -71,9 +71,9 @@ module Pirka
       end
 
       # @todo Do the best when file for release identifier is not find but for unique identifier found
-      def find_library(unique_identifier, modified)
+      def find_library(epub)
         @library_path ? Library.load_file(@library_path) :
-          Library.find_by_release_identifier("#{unique_identifier}@#{modified}")
+          Library.find_by_release_identifier(epub.release_identifier)
       end
 
       # @todo Consider descendant elements of code
