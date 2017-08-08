@@ -81,7 +81,7 @@ module Pirka
         h.each_pair do |key, value|
           if key == "codelist"
             value.each_pair do |cfi, data|
-              library.codelist[EPUB::Parser::CFI.parse(cfi)] = data
+              library.codelist[EPUB::CFI.parse(cfi)] = data
             end
           else
             library.metadata[key] = value
@@ -141,7 +141,7 @@ module Pirka
     def to_h
       metadata.merge({
         "codelist" => each.with_object({}) {|(cfi, value), list|
-          list[cfi.to_fragment] = value
+          list[cfi.to_s] = value
         }
       })
     end

@@ -47,7 +47,7 @@ EOY
               /6/31!/4/2/56/2]
     i = 0
     @library.each do |(cfi, _)|
-      assert_equal cfi.to_s, cfis[i]
+      assert_equal cfi.path_string, cfis[i]
       i += 1
     end
   end
@@ -56,7 +56,7 @@ EOY
     assert_equal %w[/6/30!/4/2/56/2
                     /6/30!/4/2/58/2
                     /6/31!/4/2/56/2],
-                 @library.each.collect {|(cfi, _)| cfi.to_s}
+                 @library.each.collect {|(cfi, _)| cfi.path_string}
   end
 
   def test_to_yaml
@@ -74,7 +74,7 @@ EOY
       assert_equal @library.metadata, data
 
       expected_codelist = @library.each.with_object({}) {|(cfi, value), list|
-        list[cfi.to_fragment] = value
+        list[cfi.to_s] = value
       }
       assert_equal expected_codelist, codelist
     end
@@ -97,7 +97,7 @@ EOY
       assert_equal @library.metadata, data
 
       expected_codelist = @library.each.with_object({}) {|(cfi, value), list|
-        list[cfi.to_fragment] = value
+        list[cfi.to_s] = value
       }
       assert_equal expected_codelist, codelist
     end
