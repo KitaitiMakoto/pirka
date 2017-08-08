@@ -1,7 +1,7 @@
 require "pathname"
 require "base64"
 require "yaml"
-require "epub/parser/cfi"
+require "epub/cfi"
 
 module Pirka
   # Environment variables affect this class:

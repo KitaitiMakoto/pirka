@@ -2,7 +2,7 @@ require "optparse"
 require "pirka/version"
 require "pirka/config"
 
-gem "epub-parser", Pirka::EPUB_PARSER_VERSION
+gem "epub-parser", ">= #{Pirka::EPUB_PARSER_VERSION}"
 
 module Pirka
   class App
