@@ -46,4 +46,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'pry-doc'
   gem.add_development_dependency 'zipruby'
+  gem.add_development_dependency 'asciidoctor'
 end
