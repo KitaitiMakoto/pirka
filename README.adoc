@@ -107,7 +107,7 @@ The directory is used to search library, too. +
 Default: `$HOME/.local/share`
 
 `XDG_DATA_DIRS`::
-Affects directory to save library files. +
+Affects directory to search library files. +
 You can specify multiple directory by seperating with a colon like `XDG_DATA_DIRS=/dir1:/dir2`. +
 `/dir1/pirka/local` and `/dir2/pirka/local` are used to search library, for example. +
 Default: `/usr/local/share:/usr/share`
