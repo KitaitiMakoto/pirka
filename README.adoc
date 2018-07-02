@@ -147,7 +147,7 @@ You can configure Pirka by `pirka` command's global options:
 
 `-c`, `--config=FILE`::
 Path to config file. +
-Default: /Users/ikeda/.config/pirka.yaml
+Default: $HOME/.config/pirka.yaml
 
 `-s`, `--data-home=DIRECTORY`::
 Same to config file's `data_home` property.
