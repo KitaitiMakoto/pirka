@@ -1,1 +1,1 @@
---markup markdown --markup-provider kramdown --title "Pirka Documentation" --protected
+--markup asciidoc --markup-provider asciidoctor --title "Pirka Documentation" --protected

@@ -23,5 +23,6 @@ Rake::TestTask.new do |test|
 end
 
 require 'yard'
+require 'asciidoctor'
 YARD::Rake::YardocTask.new  
 task :doc => :yard
