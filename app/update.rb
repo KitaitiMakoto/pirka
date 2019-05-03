@@ -57,8 +57,8 @@ module Pirka
       end
 
       def run_command(command)
-        output = `#{command}`
         $stderr.puts "Executing \`#{command}\`"
+        output = `#{command}`
         raise "Failed to execute \`#{command}\`" unless $CHILD_STATUS.success?
         output
       end
