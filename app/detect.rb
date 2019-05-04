@@ -43,7 +43,6 @@ module Pirka
           option << "(#{lexer.aliases.join(', ')})" unless lexer.aliases.empty?
           option
         }.join("  ")
-        @commands = ["s) skip", "q) quit", "c) show code", "o) show options"].join("  ")
         @commands = {
           "s" => "skip",
           "q" => "quit",
