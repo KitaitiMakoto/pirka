@@ -1,6 +1,7 @@
-=== 0.1.5 / Unreleased
+=== 0.1.5 / 2019-12-08
 
 * Improve test environment
+* [BUG FIX]Use `which` instead of `type` to find git command
 
 === 0.1.4 / 2019-05-03
 
