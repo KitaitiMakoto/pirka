@@ -37,7 +37,7 @@ module Pirka
       end
 
       def ensure_git_command
-        raise "Cannot find `git` command" unless system("type", "git")
+        raise "Cannot find `git` command" unless system("which", "git")
       end
 
       # @todo Make more generic
