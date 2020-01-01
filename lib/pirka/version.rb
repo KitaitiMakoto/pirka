@@ -17,6 +17,6 @@
 
 module Pirka
   # pirka version
-  VERSION = "0.1.5"
+  VERSION = "0.1.6"
   EPUB_PARSER_VERSION = "0.3.2"
 end
