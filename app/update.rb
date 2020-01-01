@@ -16,7 +16,6 @@ module Pirka
 
       def run(argv)
         parse_options! argv
-        ensure_git_command
         dir = determine_directory(URI)
         if dir.directory?
           update_repository(URI, dir)
@@ -34,10 +33,6 @@ module Pirka
             $stderr.puts error
           end
         end
-      end
-
-      def ensure_git_command
-        raise "Cannot find `git` command" unless system("which", "git")
       end
 
       # @todo Make more generic
