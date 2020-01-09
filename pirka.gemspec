@@ -35,6 +35,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'rouge-lexers-fluentd'
   gem.add_runtime_dependency 'optparse-pathname'
   gem.add_runtime_dependency 'colored'
+  gem.add_runtime_dependency 'gettext'
 
   gem.add_development_dependency 'bundler'
   gem.add_development_dependency 'rake'
