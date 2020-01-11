@@ -38,7 +38,7 @@ module Pirka
 
       def show_info(path)
         $stdout.puts Library.load_file(path).metadata.to_yaml
-        $stdout.puts "library: #{path}"
+        $stdout.puts "library: %{path}" % {path: path}
       end
 
       private

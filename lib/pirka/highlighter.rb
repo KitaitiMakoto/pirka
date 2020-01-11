@@ -20,7 +20,7 @@ module Pirka
           @highlighter.markup(element, lang)
           lexer = ::Rouge::Lexer.find(lang) || ::Rouge::Lexer.guess(source: element.content)
           unless lexer
-            warn "Cannot find lexer for #{lang}"
+            warn "Cannot find lexer for %{lang}" % {lang: lang}
             return
           end
           element.inner_html = @formatter.format(lexer.lex(element.content)) # @todo Consider the case `element` has descendants

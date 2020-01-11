@@ -27,9 +27,9 @@ module Pirka
           @config.library_repositories << URI
           begin
             @config.save
-            $stderr.puts "and added to config file #{@config.filepath.to_s.dump}"
+            $stderr.puts "and added to config file %{config_file}" % {config_file: @config.filepath.to_s.dump}
           rescue Errno::EACCESS => error
-            $stderr.puts "Couldn't save config file to #{@config.filepath.to_s.dump}"
+            $stderr.puts "Couldn't save config file to %{config_file}" % {config_file: @config.filepath.to_s.dump}
             $stderr.puts error
           end
         end
@@ -52,9 +52,9 @@ module Pirka
       end
 
       def run_command(command)
-        $stderr.puts "Executing \`#{command}\`"
+        $stderr.puts "Executing \`%{command}\`" % {command: command}
         output = `#{command}`
-        raise "Failed to execute \`#{command}\`" unless $CHILD_STATUS.success?
+        raise "Failed to execute \`%{command}\`" % {command: command} unless $CHILD_STATUS.success?
         output
       end
     end

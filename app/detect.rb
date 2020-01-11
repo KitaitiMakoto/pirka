@@ -66,7 +66,7 @@ module Pirka
         rescue LoadError
         end
         epub = EPUB::Parser.parse(epub_path)
-        $stderr.puts "Detecting code from \"#{epub.title}\""
+        $stderr.puts "Detecting code from \"%{title}\"" % {title: epub.title}
 
         codelist = {}
         library = Library.new
@@ -118,7 +118,6 @@ module Pirka
               })
             end
           end
-
           path = library.save(@library_path)
           $stderr.puts "Library file was saved to:"
           $stdout.puts path
@@ -136,7 +135,7 @@ module Pirka
           opt.on "-o", "--output=FILE", "File to save library data", Pathname do |path|
             @library_path = path
           end
-          opt.on "-s", "--selector=SELECTOR", "CSS selector to detect source code element. Defaults to #{SELECTOR.dump}." do |selector|
+          opt.on "-s", "--selector=SELECTOR", "CSS selector to detect source code element. Defaults to %{selector}." % {selector: SELECTOR.dump} do |selector|
             @selector = selector
           end
         end

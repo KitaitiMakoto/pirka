@@ -30,15 +30,15 @@ module Pirka
       parser = OptionParser.new {|opt|
         opt.version = Pirka::VERSION
 
-        opt.banner = <<EOB
-#{DESCRIPTION}
+        opt.banner = <<EOB % {description: DESCRIPTION, program_name: opt.program_name}
+%{description}
 
-Usage: #{opt.program_name} [global options] [<command>] [options]
+Usage: %{program_name} [global options] [<command>] [options]
 EOB
 
         opt.separator ""
         opt.separator "Global options:"
-        opt.on "-c", "--config=FILE", "Config file. Defaults to #{Config.filepath}", Pathname do |path|
+        opt.on "-c", "--config=FILE", "Config file. Defaults to %{config_path}" % {config_path: Config.filepath}, Pathname do |path|
           config_path = path
         end
         opt.on "-s", "--data-home=DIRECTORY", "Directory to *SAVE* library data", Pathname do |path|
