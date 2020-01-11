@@ -6,3 +6,7 @@
 /vendor/cache/*.gem
 /gems/
 /coverage/
+*.pot
+*.mo
+*.edit.po
+*.po.time_stamp
