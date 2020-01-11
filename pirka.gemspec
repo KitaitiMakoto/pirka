@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://gitlab.com/KitaitiMakoto/pirka"
 
   gem.files         = `git ls-files`.split($/)
+  gem.files         += Dir.glob("{po,locale}/**/*")
 
   `git submodule --quiet foreach --recursive pwd`.split($/).each do |submodule|
     submodule.sub!("#{Dir.pwd}/",'')
