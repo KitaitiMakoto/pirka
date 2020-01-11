@@ -26,3 +26,9 @@ require 'yard'
 require 'asciidoctor'
 YARD::Rake::YardocTask.new
 task :doc => :yard
+
+require "rubygems/specification"
+require "gettext/tools/task"
+GetText::Tools::Task.define do |t|
+  t.spec = Gem::Specification.load("pirka.gemspec")
+end
