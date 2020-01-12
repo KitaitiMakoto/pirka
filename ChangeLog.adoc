@@ -1,6 +1,8 @@
 === 0.1.6 / Unreleased
 
 * Don't check `git` command existence by `which` command because Windows has `where` instead of `which`
+* Internationalize app
+* Localize for Japanese
 
 === 0.1.5 / 2019-12-08
 
