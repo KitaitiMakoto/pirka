@@ -109,7 +109,7 @@ module Pirka
     end
 
     def filename
-      raise "Release Identifier is not set" unless @metadata["Release Identifier"]
+      raise _("Release Identifier is not set") unless @metadata["Release Identifier"]
       self.class.filename(@metadata["Release Identifier"])
     end
 
