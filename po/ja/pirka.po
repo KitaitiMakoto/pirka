@@ -99,19 +99,19 @@ msgid "Show library infomation"
 msgstr "ライブラリーの情報を表示します"
 
 msgid "Update library files by remote files"
-msgstr ""
+msgstr "ライブラリーファイルをリモートファイルによって更新します"
 
 msgid "Library was cloned to:"
-msgstr ""
+msgstr "ライブラリーは以下にクローンされました："
 
 msgid "and added to config file %{config_file}"
-msgstr ""
+msgstr "また、設定ファイルが %{config_file} に追加されました"
 
 msgid "Couldn't save config file to %{config_file}"
-msgstr ""
+msgstr "設定ファイルを %{config_file} に保存できませんでした"
 
 msgid "Executing \\`%{command}\\`"
-msgstr ""
+msgstr "\\`%{command}\\` を実行中"
 
 msgid "Failed to execute \\`%{command}\\`"
-msgstr ""
+msgstr "\\`%{command}\\` の実行に失敗しました"
