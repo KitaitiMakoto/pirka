@@ -1,5 +1,4 @@
 require 'helper'
-require 'pirka'
 
 class TestPirka < Test::Unit::TestCase
 

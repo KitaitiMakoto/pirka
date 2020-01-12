@@ -1,7 +1,6 @@
 require "helper"
 require "yaml"
 require "tmpdir"
-require "pirka/library"
 require "epub/cfi"
 
 class TestLibrary < Test::Unit::TestCase

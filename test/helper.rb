@@ -13,6 +13,7 @@ end
 
 require 'test/unit'
 require "test/unit/notify"
+require "pirka"
 
 class Test::Unit::TestCase
 end
