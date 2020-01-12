@@ -38,13 +38,6 @@ module Pirka
         $stdout.puts Library.load_file(path).metadata.to_yaml
         $stdout.puts "library: %{path}" % {path: path}
       end
-
-      private
-
-      def parse_options!(argv)
-        super do |opt|
-        end
-      end
     end
   end
 end
