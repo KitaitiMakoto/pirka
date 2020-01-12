@@ -15,7 +15,7 @@ module Pirka
       bindtextdomain TEXT_DOMAIN
 
       PROGRAM_NAME = "highlight"
-      DESCRIPTION = "Highlights source code in EPUB file"
+      DESCRIPTION = _("Highlights source code in EPUB file")
       ARGS = %w[EPUB_FILE]
 
       include Subcommand
@@ -79,7 +79,7 @@ module Pirka
       def find_library(epub)
         library = @library_path ? Library.load_file(@library_path) :
           Library.find_by_release_identifier(epub.release_identifier)
-        raise RuntimeError, "Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) in any directory of %{search_dirs}" \
+        raise RuntimeError, _("Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) in any directory of %{search_dirs}") \
                             % {
                                 library_file: Library.filename(epub.release_identifier),
                                 release_identifier: epub.release_identifier,
@@ -108,7 +108,7 @@ module Pirka
         library.reverse_each do |(cfi, data)|
           lang = data["language"]
           unless lang
-            warn "Language for %{cfi} is not detected" % {cfi: cfi}
+            warn _("Language for %{cfi} is not detected") % {cfi: cfi}
             next
           end
           itemref, elem, _ = EPUB::Searcher.search_by_cfi(epub, cfi)
@@ -177,7 +177,7 @@ module Pirka
       def parse_options!(argv)
         super do |opt|
           opt.separator ""
-          opt.on "-l", "--library=FILE", "Library file", Pathname do |path|
+          opt.on "-l", "--library=FILE", _("Library file"), Pathname do |path|
             @library_path = path
           end
         end
