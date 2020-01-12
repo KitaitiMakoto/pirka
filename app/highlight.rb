@@ -10,6 +10,10 @@ require_relative "subcommand"
 module Pirka
   class App
     class Highlight
+      include GetText
+
+      bindtextdomain TEXT_DOMAIN
+
       PROGRAM_NAME = "highlight"
       DESCRIPTION = "Highlights source code in EPUB file"
       ARGS = %w[EPUB_FILE]
