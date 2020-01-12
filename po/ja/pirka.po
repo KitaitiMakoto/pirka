@@ -97,3 +97,21 @@ msgstr "ライブラリーファイル"
 
 msgid "Show library infomation"
 msgstr "ライブラリーの情報を表示します"
+
+msgid "Update library files by remote files"
+msgstr ""
+
+msgid "Library was cloned to:"
+msgstr ""
+
+msgid "and added to config file %{config_file}"
+msgstr ""
+
+msgid "Couldn't save config file to %{config_file}"
+msgstr ""
+
+msgid "Executing \\`%{command}\\`"
+msgstr ""
+
+msgid "Failed to execute \\`%{command}\\`"
+msgstr ""
