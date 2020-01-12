@@ -19,6 +19,12 @@ module Pirka
       parse_options! argv
       app = APPS[argv.first] ? APPS[argv.shift] : Highlight
       app.new(@config).run(argv)
+    rescue => error
+      if $DEBUG
+        abort
+      else
+        abort error.message
+      end
     end
 
     private
@@ -45,6 +51,9 @@ EOB
         end
         opt.on "-d", "--directory=DIRECTORY", "Directory to *SEARCH* library data.", "Specify multiple times to add multiple directories.", Pathname do |path|
           @tmp_opts["additional_directories"] << path
+        end
+        opt.on "--debug", "Set debugging flag" do
+          $DEBUG = true
         end
 
         opt.separator ""
