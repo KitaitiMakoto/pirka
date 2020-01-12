@@ -115,3 +115,6 @@ msgstr "`%{command}` を実行中"
 
 msgid "Failed to execute `%{command}`"
 msgstr "`%{command}` の実行に失敗しました"
+
+msgid "Release Identifier is not set"
+msgstr ""
