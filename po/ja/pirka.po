@@ -82,10 +82,12 @@ msgstr "EPUBファイル中のソースコードをシンタックスハイラ�
 
 msgid ""
 "Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) "
-"in any directory of %{search_dirs}"
+"in any directory of:\n"
+"%{search_dirs}"
 msgstr ""
-"%{release_identifier}（%{epub_file}）用のコードリスト %{library_file} が %{search_dirs} の"
-"どのディレクトリーにも見付かりませんでした"
+"%{release_identifier}（%{epub_file}）用のコードリスト %{library_file} が以下のどのディレクトリーにも見付か"
+"りませんでした：\n"
+"%{search_dirs}"
 
 msgid "Language for %{cfi} is not detected"
 msgstr "%{cfi} の言語が検出されませんでした"
