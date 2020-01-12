@@ -10,6 +10,10 @@ module Pirka
   # 
   # @see https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   class Library
+    include GetText
+
+    bindtextdomain TEXT_DOMAIN
+
     include Enumerable
 
     DIR_NAME = "pirka/local"
