@@ -36,7 +36,7 @@ module Pirka
         opt.version = Pirka::VERSION
 
         opt.banner = <<EOB % {description: DESCRIPTION, program_name: opt.program_name}
-n%{description}
+%{description}
 
 Usage: %{program_name} [global options] [<command>] [options]
 EOB
