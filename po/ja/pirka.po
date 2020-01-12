@@ -76,3 +76,19 @@ msgstr "ソースコードの要素を検出するCSSセレクター。デフォ
 
 msgid "Which language?  "
 msgstr "どの言語ですか？  "
+
+msgid "Highlights source code in EPUB file"
+msgstr "EPUBファイル中のソースコードをシンタックスハイライトします"
+
+msgid ""
+"Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) "
+"in any directory of %{search_dirs}"
+msgstr ""
+"%{release_identifier}（%{epub_file}）用のコードリスト %{library_file} が %{search_dirs} の"
+"どのディレクトリーにも見付かりませんでした"
+
+msgid "Language for %{cfi} is not detected"
+msgstr "%{cfi} の言語が検出されませんでした"
+
+msgid "Library file"
+msgstr "ライブラリーファイル"
