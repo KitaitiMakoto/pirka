@@ -11,7 +11,7 @@ module Pirka
       bindtextdomain TEXT_DOMAIN
 
       PROGRAM_NAME = "update"
-      DESCRIPTION = "Update library files by remote files"
+      DESCRIPTION = _("Update library files by remote files")
 
       include Subcommand
 
@@ -24,15 +24,15 @@ module Pirka
           update_repository(URI, dir)
         else
           clone_repository(URI, dir)
-          $stderr.puts "Library was cloned to:"
+          $stderr.puts _("Library was cloned to:")
           $stdout.puts dir
           @config.additional_directories << dir
           @config.library_repositories << URI
           begin
             @config.save
-            $stderr.puts "and added to config file %{config_file}" % {config_file: @config.filepath.to_s.dump}
+            $stderr.puts _("and added to config file %{config_file}") % {config_file: @config.filepath.to_s.dump}
           rescue Errno::EACCESS => error
-            $stderr.puts "Couldn't save config file to %{config_file}" % {config_file: @config.filepath.to_s.dump}
+            $stderr.puts _("Couldn't save config file to %{config_file}") % {config_file: @config.filepath.to_s.dump}
             $stderr.puts error
           end
         end
@@ -55,9 +55,9 @@ module Pirka
       end
 
       def run_command(command)
-        $stderr.puts "Executing \`%{command}\`" % {command: command}
+        $stderr.puts _("Executing \`%{command}\`") % {command: command}
         output = `#{command}`
-        raise "Failed to execute \`%{command}\`" % {command: command} unless $CHILD_STATUS.success?
+        raise _("Failed to execute \`%{command}\`") % {command: command} unless $CHILD_STATUS.success?
         output
       end
     end
