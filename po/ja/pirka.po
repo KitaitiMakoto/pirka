@@ -18,28 +18,28 @@ msgstr ""
 "\n"
 
 msgid "Pirka highlights source code syntax in EPUB files"
-msgstr ""
+msgstr "Pirka（ピリカ）はEPUBファイル中のソースコードをシンタックスハイライトします"
 
 msgid "Global options:"
-msgstr ""
+msgstr "グローバルオプション："
 
 msgid "Config file. Defaults to %{config_path}"
-msgstr ""
+msgstr "設定ファイル。デフォルトは %{config_path}"
 
 msgid "Directory to *SAVE* library data"
-msgstr ""
+msgstr "ライブラリーのデータを「保存」するディレクトリー"
 
 msgid "Directory to *SEARCH* library data."
-msgstr ""
+msgstr "ライブラリーのデータを「探」すディレクトリー"
 
 msgid "Specify multiple times to add multiple directories."
-msgstr ""
+msgstr "複数回指定することで複数のディレクトリーを追加できます"
 
 msgid "Set debugging flag"
-msgstr ""
+msgstr "デバッグフラグを設定"
 
 msgid "Commands:"
-msgstr ""
+msgstr "コマンド："
 
 msgid "If command is ommitted, highlight is used with no option"
-msgstr ""
+msgstr "コマンドを省略した場合はオプションなしのhighlightが使われます"
