@@ -5,6 +5,10 @@ gem "epub-parser", ">= #{Pirka::EPUB_PARSER_VERSION}"
 
 module Pirka
   class App
+    include GetText
+
+    bindtextdomain TEXT_DOMAIN
+
     DESCRIPTION = _("Pirka highlights source code syntax in EPUB files")
     APPS = {}
 
