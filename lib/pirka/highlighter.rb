@@ -24,7 +24,7 @@ module Pirka
           @highlighter.markup(element, lang)
           lexer = ::Rouge::Lexer.find(lang) || ::Rouge::Lexer.guess(source: element.content)
           unless lexer
-            warn "Cannot find lexer for %{lang}" % {lang: lang}
+            warn _("Cannot find lexer for %{lang}") % {lang: lang}
             return
           end
           element.inner_html = @formatter.format(lexer.lex(element.content)) # @todo Consider the case `element` has descendants
@@ -54,7 +54,7 @@ module Pirka
         def initialize(highlighter, params = {})
           @highlighter = highlighter
           @selector = params["selector"]
-          raise "selector param not specified" unless @selector
+          raise _("selector param not specified") unless @selector
         end
 
         def markup(element, lang)
