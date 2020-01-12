@@ -6,6 +6,10 @@ require_relative "subcommand"
 module Pirka
   class App
     class Update
+      include GetText
+
+      bindtextdomain TEXT_DOMAIN
+
       PROGRAM_NAME = "update"
       DESCRIPTION = "Update library files by remote files"
 
