@@ -117,4 +117,4 @@ msgid "Failed to execute `%{command}`"
 msgstr "`%{command}` の実行に失敗しました"
 
 msgid "Release Identifier is not set"
-msgstr ""
+msgstr "Release Identifierが設定されていません"
