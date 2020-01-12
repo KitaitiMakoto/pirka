@@ -96,4 +96,4 @@ msgid "Library file"
 msgstr "ライブラリーファイル"
 
 msgid "Show library infomation"
-msgstr ""
+msgstr "ライブラリーの情報を表示します"
