@@ -110,8 +110,8 @@ msgstr "また、設定ファイルが %{config_file} に追加されました"
 msgid "Couldn't save config file to %{config_file}"
 msgstr "設定ファイルを %{config_file} に保存できませんでした"
 
-msgid "Executing \\`%{command}\\`"
-msgstr "\\`%{command}\\` を実行中"
+msgid "Executing `%{command}`"
+msgstr "`%{command}` を実行中"
 
-msgid "Failed to execute \\`%{command}\\`"
-msgstr "\\`%{command}\\` の実行に失敗しました"
+msgid "Failed to execute `%{command}`"
+msgstr "`%{command}` の実行に失敗しました"
