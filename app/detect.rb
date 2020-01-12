@@ -6,7 +6,6 @@ require "epub/searcher"
 require "rouge"
 require "rouge/lexers/fluentd"
 require "colored"
-require "pirka/library"
 require_relative "subcommand"
 
 module Pirka

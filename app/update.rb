@@ -1,7 +1,6 @@
 require "English"
 require "pathname"
 require "uri"
-require "pirka/library"
 require_relative "subcommand"
 
 module Pirka

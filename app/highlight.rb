@@ -5,8 +5,6 @@ require "epub/parser"
 require "epub/maker"
 require "rouge"
 require "rouge/lexers/fluentd"
-require "pirka/library"
-require "pirka/highlighter"
 require_relative "subcommand"
 
 module Pirka

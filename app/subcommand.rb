@@ -1,3 +1,5 @@
+require "pirka"
+
 module Pirka
   class App
     module Subcommand

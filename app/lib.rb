@@ -1,5 +1,3 @@
-require "pirka/library"
-
 module Pirka
   class App
     class Lib

@@ -1,6 +1,5 @@
 require "optparse"
-require "pirka/version"
-require "pirka/config"
+require "pirka"
 
 gem "epub-parser", ">= #{Pirka::EPUB_PARSER_VERSION}"
 
