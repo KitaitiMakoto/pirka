@@ -3,6 +3,10 @@ require "rouge/lexers/fluentd"
 
 module Pirka
   class Highlighter
+    include GetText
+
+    bindtextdomain TEXT_DOMAIN
+
     def markup(element, lang)
       # noop
     end
