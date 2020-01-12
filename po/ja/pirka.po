@@ -117,10 +117,10 @@ msgid "Failed to execute `%{command}`"
 msgstr "`%{command}` の実行に失敗しました"
 
 msgid "Cannot find lexer for %{lang}"
-msgstr ""
+msgstr "%{lang} 用のレクサーが見付かりません"
 
 msgid "selector param not specified"
-msgstr ""
+msgstr "selector パラメーターが指定されていません"
 
 msgid "Release Identifier is not set"
 msgstr "Release Identifierが設定されていません"
