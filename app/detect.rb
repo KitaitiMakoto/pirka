@@ -16,7 +16,7 @@ module Pirka
       bindtextdomain TEXT_DOMAIN
 
       PROGRAM_NAME = "detect"
-      DESCRIPTION = "Detects source code from EPUB file and generate library file"
+      DESCRIPTION = _("Detects source code from EPUB file and generate library file")
       ARGS = %w[EPUB_FILE]
 
       include Subcommand
@@ -47,10 +47,10 @@ module Pirka
           option
         }.join("  ")
         @commands = {
-          "s" => "skip",
-          "q" => "quit",
-          "c" => "show code",
-          "o" => "show options"
+          "s" => _("skip"),
+          "q" => _("quit"),
+          "c" => _("show code"),
+          "o" => _("show options")
         }.collect {|(key, command)|
           "#{key})".bold << " " << command
         }.join("  ")
@@ -60,7 +60,7 @@ module Pirka
         parse_options! argv
 
         epub_path = argv.shift
-        raise ArgumentError, 'Specify EPUB file' unless epub_path
+        raise ArgumentError, _('Specify EPUB file') unless epub_path
 
         begin
           # @todo Make this optional
@@ -69,7 +69,7 @@ module Pirka
         rescue LoadError
         end
         epub = EPUB::Parser.parse(epub_path)
-        $stderr.puts "Detecting code from \"%{title}\"" % {title: epub.title}
+        $stderr.puts _("Detecting code from \"%{title}\"") % {title: epub.title}
 
         codelist = {}
         library = Library.new
@@ -122,7 +122,7 @@ module Pirka
             end
           end
           path = library.save(@library_path)
-          $stderr.puts "Library file was saved to:"
+          $stderr.puts _("Library file was saved to:")
           $stdout.puts path
         end
       end
@@ -135,10 +135,10 @@ module Pirka
           opt.on "-i", "--interactive" do
             @interactive = true
           end
-          opt.on "-o", "--output=FILE", "File to save library data", Pathname do |path|
+          opt.on "-o", "--output=FILE", _("File to save library data"), Pathname do |path|
             @library_path = path
           end
-          opt.on "-s", "--selector=SELECTOR", "CSS selector to detect source code element. Defaults to %{selector}." % {selector: SELECTOR.dump} do |selector|
+          opt.on "-s", "--selector=SELECTOR", _("CSS selector to detect source code element. Defaults to %{selector}.") % {selector: SELECTOR.dump} do |selector|
             @selector = selector
           end
         end
@@ -165,7 +165,7 @@ module Pirka
       end
 
       def ask
-        $stderr.print "Which language?  "
+        $stderr.print _("Which language?  ")
         $stdin.gets.chomp
       end
     end
