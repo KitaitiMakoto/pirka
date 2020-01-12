@@ -6,7 +6,7 @@ module Pirka
       bindtextdomain TEXT_DOMAIN
 
       PROGRAM_NAME = "lib"
-      DESCRIPTION = "Show library infomation"
+      DESCRIPTION = _("Show library infomation")
 
       include Subcommand
 
