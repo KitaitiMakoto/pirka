@@ -43,3 +43,36 @@ msgstr "コマンド："
 
 msgid "If command is ommitted, highlight is used with no option"
 msgstr "コマンドを省略した場合はオプションなしのhighlightが使われます"
+
+msgid "Detects source code from EPUB file and generate library file"
+msgstr "EPUBファイルからソースコードを検出し、ライブラリーファイルを生成します"
+
+msgid "skip"
+msgstr "スキップ"
+
+msgid "quit"
+msgstr "終了"
+
+msgid "show code"
+msgstr "コードを表示"
+
+msgid "show options"
+msgstr "選択肢を表示"
+
+msgid "Specify EPUB file"
+msgstr "EPUBファイルを指定してください"
+
+msgid "Detecting code from \"%{title}\""
+msgstr "『%{title}』からコードを検出中"
+
+msgid "Library file was saved to:"
+msgstr "ライブラリーファイルを以下の場所に保存しました："
+
+msgid "File to save library data"
+msgstr "ライブラリーデータを保存するファイル"
+
+msgid "CSS selector to detect source code element. Defaults to %{selector}."
+msgstr "ソースコードの要素を検出するCSSセレクター。デフォルトは %{selector}"
+
+msgid "Which language?  "
+msgstr "どの言語ですか？  "
