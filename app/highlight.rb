@@ -173,7 +173,7 @@ module Pirka
       def parse_options!(argv)
         super do |opt|
           opt.separator ""
-          opt.on "-l", "--library=FILE", "library file", Pathname do |path|
+          opt.on "-l", "--library=FILE", "Library file", Pathname do |path|
             @library_path = path
           end
         end
