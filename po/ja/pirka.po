@@ -116,5 +116,11 @@ msgstr "`%{command}` を実行中"
 msgid "Failed to execute `%{command}`"
 msgstr "`%{command}` の実行に失敗しました"
 
+msgid "Cannot find lexer for %{lang}"
+msgstr ""
+
+msgid "selector param not specified"
+msgstr ""
+
 msgid "Release Identifier is not set"
 msgstr "Release Identifierが設定されていません"
