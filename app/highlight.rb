@@ -79,13 +79,15 @@ module Pirka
       def find_library(epub)
         library = @library_path ? Library.load_file(@library_path) :
           Library.find_by_release_identifier(epub.release_identifier)
-        raise RuntimeError, _("Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) in any directory of %{search_dirs}") \
-                            % {
-                                library_file: Library.filename(epub.release_identifier),
-                                release_identifier: epub.release_identifier,
-                                epub_file: epub.epub_file,
-                                search_dirs: Library.directories.join(", ")
-                              } unless library
+        unless library
+          raise RuntimeError, _("Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) in any directory of %{search_dirs}") \
+                              % {
+                                  library_file: Library.filename(epub.release_identifier),
+                                  release_identifier: epub.release_identifier,
+                                  epub_file: epub.epub_file,
+                                  search_dirs: Library.directories.join(", ")
+                                }
+        end
         library
       end
 
