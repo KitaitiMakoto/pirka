@@ -94,3 +94,6 @@ msgstr "%{cfi} の言語が検出されませんでした"
 
 msgid "Library file"
 msgstr "ライブラリーファイル"
+
+msgid "Show library infomation"
+msgstr ""
