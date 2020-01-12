@@ -1,6 +1,10 @@
 module Pirka
   class App
     class Lib
+      include GetText
+
+      bindtextdomain TEXT_DOMAIN
+
       PROGRAM_NAME = "lib"
       DESCRIPTION = "Show library infomation"
 
