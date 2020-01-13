@@ -24,3 +24,4 @@ require "gettext/tools/task"
 GetText::Tools::Task.define do |t|
   t.spec = Gem::Specification.load("pirka.gemspec")
 end
+task :build => :gettext
