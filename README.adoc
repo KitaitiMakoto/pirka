@@ -180,7 +180,7 @@ If command is ommitted, highlight is used with no option
 
 == Requirements
 
-* Ruby 2.2 or later
+* Ruby 2.5 or later
 * C compiler to compile link:http://www.nokogiri.org/[Nokogiri] gem
 
 == Install
