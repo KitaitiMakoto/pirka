@@ -10,15 +10,12 @@ require_relative "subcommand"
 module Pirka
   class App
     class Highlight
-      include GetText
-
-      bindtextdomain TEXT_DOMAIN
-
       PROGRAM_NAME = "highlight"
-      DESCRIPTION = _("Highlights source code in EPUB file")
-      ARGS = %w[EPUB_FILE]
 
       include Subcommand
+
+      DESCRIPTION = _("Highlights source code in EPUB file")
+      ARGS = %w[EPUB_FILE]
 
       DUMMY_ORIGIN = Addressable::URI.parse("file:///")
       CSS_PATH = "pirka/style.css" # @todo Avoid conflict with existing item by other than Pirka

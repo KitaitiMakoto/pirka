@@ -1,14 +1,11 @@
 module Pirka
   class App
     class Lib
-      include GetText
-
-      bindtextdomain TEXT_DOMAIN
-
       PROGRAM_NAME = "lib"
-      DESCRIPTION = _("Show library infomation")
 
       include Subcommand
+
+      DESCRIPTION = _("Show library infomation")
 
       def run(argv)
         # show all

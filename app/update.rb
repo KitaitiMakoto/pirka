@@ -6,14 +6,11 @@ require_relative "subcommand"
 module Pirka
   class App
     class Update
-      include GetText
-
-      bindtextdomain TEXT_DOMAIN
-
       PROGRAM_NAME = "update"
-      DESCRIPTION = _("Update library files by remote files")
 
       include Subcommand
+
+      DESCRIPTION = _("Update library files by remote files")
 
       URI = ::URI.parse("https://gitlab.com/KitaitiMakoto/pirka-library.git")
 

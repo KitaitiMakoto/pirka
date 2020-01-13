@@ -3,9 +3,14 @@ require "pirka"
 module Pirka
   class App
     module Subcommand
+      include GetText
+
+      bindtextdomain TEXT_DOMAIN
+
       class << self
         def included(base)
           APPS[base::PROGRAM_NAME] = base
+          base.extend GetText
         end
       end
 

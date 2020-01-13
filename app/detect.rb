@@ -11,15 +11,12 @@ require_relative "subcommand"
 module Pirka
   class App
     class Detect
-      include GetText
-
-      bindtextdomain TEXT_DOMAIN
-
       PROGRAM_NAME = "detect"
-      DESCRIPTION = _("Detects source code from EPUB file and generate library file")
-      ARGS = %w[EPUB_FILE]
 
       include Subcommand
+
+      DESCRIPTION = _("Detects source code from EPUB file and generate library file")
+      ARGS = %w[EPUB_FILE]
 
       SELECTOR = "code"
 
