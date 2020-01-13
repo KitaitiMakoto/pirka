@@ -69,7 +69,7 @@ module Pirka
         rescue LoadError
         end
         epub = EPUB::Parser.parse(epub_path)
-        $stderr.puts _("Detecting code from \"%{title}\"") % {title: epub.title}
+        $stderr.puts _("Detecting code from \"%{title}\"").encode(__ENCODING__) % {title: epub.title}
 
         codelist = {}
         library = Library.new

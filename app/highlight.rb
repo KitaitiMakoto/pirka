@@ -81,6 +81,7 @@ module Pirka
           Library.find_by_release_identifier(epub.release_identifier)
         unless library
           message_template = _("Cannot find code list %{library_file} for %{release_identifier}(%{epub_file}) in any directory of:\n%{search_dirs}")
+                               .encode(__ENCODING__) # Needed for Windows non-ascii environment such as code page 932 a.k.a Windiws-31J a Shift_JIS variant encoding
           message = message_template % {
             library_file: Library.filename(epub.release_identifier),
             release_identifier: epub.release_identifier,
