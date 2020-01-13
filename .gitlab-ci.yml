@@ -1,13 +1,11 @@
 before_script:
   - ruby -v
   - which ruby
-  - gem install bundler --no-document
-  - bundle install --jobs=$(nproc) --path=deps --quiet
-  - bundle clean
+  - gem install bundler --no-document epub-parser epub-maker rouge rouge-lexers-fluentd optparse-pathname colored gettext rake test-unit test-unit-notify simplecov rubygems-tasks yard pry pry-doc zipruby asciidoctor
 
 test:2.2:
   image: ruby:2.2
-  script: bundle exec rake test
+  script: rake test
   except:
     - tags
   cache:
@@ -17,7 +15,7 @@ test:2.2:
 
 test:2.3:
   image: ruby:2.3
-  script: bundle exec rake test
+  script: rake test
   except:
     - tags
   cache:
@@ -27,7 +25,7 @@ test:2.3:
 
 test:2.4:
   image: ruby:2.4
-  script: bundle exec rake test
+  script: rake test
   except:
     - tags
   cache:
@@ -37,7 +35,7 @@ test:2.4:
 
 test:2.5:
   image: ruby:2.5
-  script: bundle exec rake test
+  script: rake test
   except:
     - tags
   cache:
@@ -47,7 +45,7 @@ test:2.5:
 
 test:2.6:
   image: ruby:2.6
-  script: bundle exec rake test
+  script: rake test
   except:
     - tags
   cache:
@@ -57,7 +55,7 @@ test:2.6:
 
 test:2.7:
   image: ruby:2.7
-  script: bundle exec rake test
+  script: rake test
   except:
     - tags
   cache:
