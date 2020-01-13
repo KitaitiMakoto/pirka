@@ -2,7 +2,7 @@ require 'pirka/version'
 require "gettext"
 
 module Pirka
-  TEXT_DOMAIN = Gem::Specification.load(File.join(__dir__, "../pirka.gemspec")).name
+  TEXT_DOMAIN = "pirka"
 end
 
 require "pirka/library"
