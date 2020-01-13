@@ -63,7 +63,7 @@ module Pirka
 
       # @todo Make this optional
       def prepare_epub(path)
-        raise ArgumentError, 'Specify EPUB file' unless path
+        raise ArgumentError, _('Specify EPUB file') unless path
         begin
           require 'epub/maker/ocf/physical_container/zipruby'
           EPUB::OCF::PhysicalContainer.adapter = :Zipruby
