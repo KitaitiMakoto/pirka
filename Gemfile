@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'epub-parser', path: '../epub-parser'
-gem 'epub-maker', path: '../epub-maker'
+group :development, :test do
+  unless ENV.key? "CI"
+    gem 'epub-parser', path: '../epub-parser'
+    gem 'epub-maker', path: '../epub-maker'
+  end
+end
 
 gemspec
 
