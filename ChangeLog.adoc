@@ -1,4 +1,4 @@
-=== 0.1.6 / Unreleased
+=== 0.1.6 / 2020-01-13
 
 * Don't check `git` command existence by `which` command because Windows has `where` instead of `which`
 * Internationalize app
