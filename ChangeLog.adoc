@@ -1,5 +1,7 @@
 === 0.1.9 / Unreleased
 
+* Add `--default-language` option to `highlight` command. It fills language properties in library file with specified language.
+
 === 0.1.8 / 2020-01-13
 
 * [BUG FIX]Set gettext text domain by string literal to avoid git command execution in pirka.gemspec
