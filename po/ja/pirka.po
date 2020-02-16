@@ -77,7 +77,7 @@ msgstr "ソースコードの要素を検出するCSSセレクター。デフォ
 msgid ""
 "Default language. Fills language property with LANG. Enabled only when --inter"
 "active option is not set."
-msgstr "デフォルト言語。languageプロパティをLANGで埋めます。--interactiveオプションが設定されている時のみ有効です。"
+msgstr "デフォルト言語。languageプロパティをLANGで埋めます。--interactiveオプションが設定されていない時のみ有効です。"
 
 msgid "Which language?  "
 msgstr "どの言語ですか？  "
