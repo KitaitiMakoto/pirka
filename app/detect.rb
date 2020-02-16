@@ -26,6 +26,7 @@ module Pirka
         @library_path = nil
         @interactive = false
         @selector = SELECTOR
+        @default_language = nil
 
         @available_lexers = Rouge::Lexer.all.sort_by(&:tag).each_with_object({}).with_index {|(lexer, lexers), index|
           lexers[(index + 1).to_s] = lexer
@@ -112,7 +113,7 @@ module Pirka
               end
             else
               library.codelist[result[:location]] = ({
-                "language" => nil,
+                "language" => @default_language,
                 "item" => result[:itemref].item.entry_name,
                 "code" => result[:element].content
               })
@@ -137,6 +138,9 @@ module Pirka
           end
           opt.on "-s", "--selector=SELECTOR", _("CSS selector to detect source code element. Defaults to %{selector}.") % {selector: SELECTOR.dump} do |selector|
             @selector = selector
+          end
+          opt.on "-l", "--default-language=LANG", _("Default language. Fills language property with LANG. Enabled only when --interactive option is not set.") do |lang|
+            @default_language = lang
           end
         end
       end
