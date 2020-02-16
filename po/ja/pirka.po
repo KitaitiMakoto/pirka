@@ -74,6 +74,11 @@ msgstr "ライブラリーデータを保存するファイル"
 msgid "CSS selector to detect source code element. Defaults to %{selector}."
 msgstr "ソースコードの要素を検出するCSSセレクター。デフォルトは %{selector}"
 
+msgid ""
+"Default language. Fills language property with LANG. Enabled only when --inter"
+"active option is not set."
+msgstr ""
+
 msgid "Which language?  "
 msgstr "どの言語ですか？  "
 
