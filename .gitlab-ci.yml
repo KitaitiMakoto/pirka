@@ -3,26 +3,6 @@ before_script:
   - which ruby
   - gem install bundler --no-document epub-parser epub-maker rouge rouge-lexers-fluentd optparse-pathname colored gettext rake test-unit test-unit-notify simplecov rubygems-tasks yard pry pry-doc zipruby asciidoctor
 
-test:2.5:
-  image: ruby:2.5
-  script: rake test
-  except:
-    - tags
-  cache:
-    key: ruby:2.5
-    paths:
-      - deps
-
-test:2.6:
-  image: ruby:2.6
-  script: rake test
-  except:
-    - tags
-  cache:
-    key: ruby:2.6
-    paths:
-      - deps
-
 test:2.7:
   image: ruby:2.7
   script: rake test
@@ -30,5 +10,35 @@ test:2.7:
     - tags
   cache:
     key: ruby:2.7
+    paths:
+      - deps
+
+test:3.0:
+  image: ruby:3.0
+  script: rake test
+  except:
+    - tags
+  cache:
+    key: ruby:3.0
+    paths:
+      - deps
+
+test:3.1:
+  image: ruby:3.1
+  script: rake test
+  except:
+    - tags
+  cache:
+    key: ruby:3.1
+    paths:
+      - deps
+
+test:3.2:
+  image: ruby:3.3
+  script: rake test
+  except:
+    - tags
+  cache:
+    key: ruby:3.3
     paths:
       - deps
