@@ -1,3 +1,7 @@
+=== Unreleased
+
+* Remove zipruby from dependencies
+
 === 0.1.9 / 2020-02-16
 
 * Add `--default-language` option to `highlight` command. It fills language properties in library file with specified language.
