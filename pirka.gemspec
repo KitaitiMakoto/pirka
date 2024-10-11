@@ -49,4 +49,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'pry-doc'
   gem.add_development_dependency 'asciidoctor'
+  gem.add_development_dependency 'nokogiri', '< 1.16.0' if RbConfig::CONFIG["MAJOR"] == "2"
 end
