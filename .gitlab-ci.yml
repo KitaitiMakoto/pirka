@@ -1,7 +1,8 @@
 before_script:
   - ruby -v
   - which ruby
-  - gem install bundler --no-document epub-parser epub-maker rouge rouge-lexers-fluentd optparse-pathname colored gettext rake test-unit test-unit-notify simplecov rubygems-tasks yard pry pry-doc zipruby asciidoctor
+  - gem install bundler --no-document
+  - bundle install
 
 test:2.7:
   image: ruby:2.7
