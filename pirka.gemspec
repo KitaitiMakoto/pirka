@@ -30,6 +30,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
+  gem.add_runtime_dependency 'base64'
   gem.add_runtime_dependency 'epub-parser', ">= #{Pirka::EPUB_PARSER_VERSION}"
   gem.add_runtime_dependency 'epub-maker'
   gem.add_runtime_dependency 'rouge'
